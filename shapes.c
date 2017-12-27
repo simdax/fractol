@@ -6,11 +6,18 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:49:25 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/27 15:33:47 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/27 16:36:53 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+typedef struct	s_line
+{
+	t_point		origin;
+	float		slope;
+	int			steps;
+}				t_line;
 
 void	square(int x, int y, int width, t_libx *libx)
 {
@@ -30,26 +37,24 @@ void	square(int x, int y, int width, t_libx *libx)
 	}			
 }
 
-static void draw_line(t_point point, float slope, int steps, t_libx *libx)
+static void draw_line(t_line line, int reverse, t_libx *libx)
 {	
 	float x;
 	float y;	
 	
 	y = 0;
 	x = 0;
-	if (!steps)
-		while ((int)y != slope)
+	while ((int)x != line.steps)
+	{
+		if (reverse)
 		{
-			PUT(point.x, point.y + (int)y);
-			y += slope > 0 ? 1 : -1;
+			PUT(line.origin.x + (int)y, line.origin.x + (int)x);	
 		}
-	else
-		while ((int)x != steps)
-		{
-			PUT(point.x + (int)x, point.y + (int)y);
-			x += steps > 0 ? 1 : -1;
-			y += slope;
-		}
+		else
+			PUT(line.origin.x + (int)x, line.origin.y + (int)y);
+		x += line.steps > 0 ? 1 : -1;
+		y += line.slope;
+	}
 }
 
 void	line(t_point x1, t_point x2, t_libx *libx)
@@ -60,12 +65,18 @@ void	line(t_point x1, t_point x2, t_libx *libx)
 	
 	stepsX = x2.x - x1.x;
 	stepsY = x2.y - x1.y;
-	if (!stepsX)
-		draw_line(x1, stepsY, 0, libx);
 	slope = (float)stepsY / (float)stepsX;
 	slope = slope < 0 ? -slope : slope;
 	if (slope <= 1)
-		draw_line(x1, slope * (stepsY < 0 ? -1 : 1), stepsX, libx);
+		draw_line((t_line){
+				x1,
+				slope * (stepsY < 0 ? -1 : 1),
+				stepsX
+				}, 0, libx);	
 	else
-		line(x2, x1, libx);
+		draw_line((t_line){
+				x1,
+					1 / slope * (stepsX < 0 ? -1 : 1),
+						stepsY
+						}, 1, libx);
 }
