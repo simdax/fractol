@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:49:25 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/27 16:36:53 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/27 17:12:37 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void draw_line(t_line line, int reverse, t_libx *libx)
 	{
 		if (reverse)
 		{
-			PUT(line.origin.x + (int)y, line.origin.x + (int)x);	
+			PUT(line.origin.x + (int)y, line.origin.y + (int)x);	
 		}
 		else
 			PUT(line.origin.x + (int)x, line.origin.y + (int)y);
