@@ -6,18 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:49:25 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/27 17:12:37 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/27 17:22:15 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-typedef struct	s_line
-{
-	t_point		origin;
-	float		slope;
-	int			steps;
-}				t_line;
 
 void	square(int x, int y, int width, t_libx *libx)
 {
@@ -34,21 +27,21 @@ void	square(int x, int y, int width, t_libx *libx)
 			++tmp2;
 		}
 		++tmp;
-	}			
+	}
 }
 
-static void draw_line(t_line line, int reverse, t_libx *libx)
-{	
+void	draw_line(t_line line, int reverse, t_libx *libx)
+{
 	float x;
-	float y;	
-	
+	float y;
+
 	y = 0;
 	x = 0;
 	while ((int)x != line.steps)
 	{
 		if (reverse)
 		{
-			PUT(line.origin.x + (int)y, line.origin.y + (int)x);	
+			PUT(line.origin.x + (int)y, line.origin.y + (int)x);
 		}
 		else
 			PUT(line.origin.x + (int)x, line.origin.y + (int)y);
@@ -59,24 +52,24 @@ static void draw_line(t_line line, int reverse, t_libx *libx)
 
 void	line(t_point x1, t_point x2, t_libx *libx)
 {
-	int stepsX;
-	int stepsY;
-	float slope;
-	
-	stepsX = x2.x - x1.x;
-	stepsY = x2.y - x1.y;
-	slope = (float)stepsY / (float)stepsX;
+	int		steps_x;
+	int		steps_y;
+	float	slope;
+
+	steps_x = x2.x - x1.x;
+	steps_y = x2.y - x1.y;
+	slope = (float)steps_y / (float)steps_x;
 	slope = slope < 0 ? -slope : slope;
 	if (slope <= 1)
 		draw_line((t_line){
 				x1,
-				slope * (stepsY < 0 ? -1 : 1),
-				stepsX
-				}, 0, libx);	
+				slope * (steps_y < 0 ? -1 : 1),
+				steps_x
+				}, 0, libx);
 	else
 		draw_line((t_line){
 				x1,
-					1 / slope * (stepsX < 0 ? -1 : 1),
-						stepsY
+					1 / slope * (steps_x < 0 ? -1 : 1),
+						steps_y
 						}, 1, libx);
 }
