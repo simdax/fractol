@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:49:25 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/27 14:49:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/27 14:52:10 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static void draw_line(t_point point, float slope, int steps, t_libx *libx)
 	{
 		while ((int)y != slope)
 		{
-			PUT(point.x + (int)x, point.y + (int)y);
-			y += steps > 0 ? 1 : -1;
+			PUT(point.x, point.y + (int)y);
+			y += slope > 0 ? 1 : -1;
 		}
 	}
 	else {
