@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:49:25 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/27 12:49:36 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/27 14:49:06 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,28 @@ void	square(int x, int y, int width, t_libx *libx)
 	}			
 }
 
-static draw_line(t_point point, float slope, int steps, t_libx *libx)
+static void draw_line(t_point point, float slope, int steps, t_libx *libx)
 {	
 	float x;
 	float y;	
 	
 	x = 0;
 	y = 0;
-	while ((int)x != steps)
+	if (!steps)
 	{
-		PUT(point.x + (int)x, point.y + (int)y);
-		x += steps > 0 ? 1 : -1;
-		y += slope;
+		while ((int)y != slope)
+		{
+			PUT(point.x + (int)x, point.y + (int)y);
+			y += steps > 0 ? 1 : -1;
+		}
+	}
+	else {
+		while ((int)x != steps)
+		{
+			PUT(point.x + (int)x, point.y + (int)y);
+			x += steps > 0 ? 1 : -1;
+			y += slope;
+		}
 	}
 }
 
@@ -53,7 +63,16 @@ void	line(t_point x1, t_point x2, t_libx *libx)
 	
 	stepsX = x2.x - x1.x;
 	stepsY = x2.y - x1.y;
-	slope = stepsX != 0 ? (float)stepsY / (float)stepsX : 0;
+	if (!stepsX)
+	{
+		if (!stepsY)
+		{
+			PUT(x1.x, x1.y);
+			return ;
+		}	
+		draw_line(x1, stepsY, 0, libx);
+	}
+	slope = (float)stepsY / (float)stepsX;
 	slope = slope < 0 ? -slope : slope;
 	if (slope <= 1)
 		draw_line(x1, slope * (stepsY < 0 ? -1 : 1), stepsX, libx);
