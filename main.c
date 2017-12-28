@@ -6,28 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 12:12:09 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/28 12:14:08 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-#define OFFSET_X	10
-#define OFFSET_Y	10
-
-typedef struct	s_matrix
-{
-	int			len;
-	int			cols;
-	int			rows;
-	t_point		*points;
-}				t_matrix;
-	
-typedef struct	s_prog
-{
-	t_libx		*libx;
-	t_matrix	*matrix;
-}				t_prog;
 
 t_point	point_from_index(int nb, int space, int rows, int cols)
 {
@@ -66,20 +49,6 @@ void	draw(t_matrix *matrix, long color, t_libx *libx)
 			line(points[i], points[i + rows], color, libx);
 		++i;
 	}
-}
-
-int		transform(int keycode, void *arg)
-{
-	t_prog	*prog;
-	int 	len;
-	
-	prog =	(t_prog*)arg;
-	len = prog->matrix->len;
-	draw(prog->matrix, 0x000000, prog->libx);
-	while (--len >= 0)
-		prog->matrix->points[len].x += 1;
-	draw(prog->matrix, 0x00FF00, prog->libx);
-	return (0);
 }
 
 int		main(void)

@@ -1,4 +1,4 @@
-SRCS = main.c shapes.c
+SRCS = main.c shapes.c transforms.c
 
 all:
 	gcc -g3 -lmlx -framework OpenGL -framework AppKit $(SRCS)
