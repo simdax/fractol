@@ -6,11 +6,19 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:51:57 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 14:59:58 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:52:04 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "libft/libft.h"
+
+/* void	parse() */
+/* { */
+/* 	int fd; */
+
+/* 	fd = open(""); */
+/* } */
 
 t_point	point_from_index(int nb, int space, int rows, int cols)
 {
