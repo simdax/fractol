@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 19:05:22 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/28 19:29:19 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "fcntl.h"
 # include "stdlib.h"
 
+# define SIZE_X				800
+# define SIZE_Y				800
 # define OFFSET_X			100
 # define OFFSET_Y			100
 # define PUT(x, y, color)	mlx_pixel_put(libx->mlx, libx->win, x, y, color);
@@ -58,6 +60,14 @@ typedef struct	s_prog
 	t_libx		*libx;
 	t_matrix	*matrix;
 }				t_prog;
+
+typedef struct	s_map
+{
+	int len;
+	int rows;
+	int cols;
+	int	*values;
+}				t_map;
 
 void				line(t_point x1, t_point x2, long color, t_libx *libx);
 int					transform(int keycode, void *arg);

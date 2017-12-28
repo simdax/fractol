@@ -6,20 +6,12 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:51:57 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 19:05:15 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/28 19:22:59 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft/libft.h"
-
-typedef struct	s_map
-{
-	int len;
-	int rows;
-	int cols;
-	int	*values;
-}				t_map;
 
 t_map			*parse(void)
 {

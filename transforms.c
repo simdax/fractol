@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 16:18:29 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/28 19:22:05 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,3 @@ void	event_manager(int keycode, t_matrix *matrix)
 	else if (keycode == 46)
 		scale(matrix, 1.5);
 }
-
-int		transform(int keycode, void *arg)
-{
-	t_prog			*prog;
-	int 			len;
-
-	printf("keycode %d\n", keycode);
-	fflush(stdout);
-	prog =	(t_prog*)arg;
-	draw(prog->matrix, 0x000000, prog->libx);
-	event_manager(keycode, prog->matrix);
-	draw(prog->matrix, 0x00FF00, prog->libx);
-	return (0);
-}
-
