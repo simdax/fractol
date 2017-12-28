@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/27 17:24:02 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/28 12:09:17 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include "stdio.h"
 # include "stdlib.h"
 
-# define PUT(x, y)	mlx_pixel_put(libx->mlx, libx->win, x, y, 0x00FFFFFF);
-# define ABS(x)		x < 0 ? -x : x
-# define MAX(x, y)	x > y ? x : y
+# define PUT(x, y, color)	mlx_pixel_put(libx->mlx, libx->win, x, y, color);
+# define ABS(x)				x < 0 ? -x : x
+# define MAX(x, y)			x > y ? x : y
 
 typedef struct		s_libx
 {
@@ -42,6 +42,6 @@ typedef struct		s_line
 	int				steps;
 }					t_line;
 
-void				line(t_point x1, t_point x2, t_libx *libx);
+void				line(t_point x1, t_point x2, long color, t_libx *libx);
 
 #endif
