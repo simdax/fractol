@@ -1,7 +1,10 @@
-SRCS = main.c shapes.c transforms.c
+SRCS := main.c shapes.c transforms.c parse.c
+LD := -L libft
+FLAGS := -g3 $(LD)
 
 all:
-	gcc -g3 -lmlx -framework OpenGL -framework AppKit $(SRCS)
+	make -C libft
+	gcc $(FLAGS) -lft -lmlx -framework OpenGL -framework AppKit $(SRCS)
 
 test: all
 	./a.out
