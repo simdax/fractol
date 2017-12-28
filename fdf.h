@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 14:56:38 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/28 19:05:22 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 # include "mlx.h"
 # include "math.h"
 # include "stdio.h"
+# include "fcntl.h"
 # include "stdlib.h"
 
-#define OFFSET_X			100
-#define OFFSET_Y			100
+# define OFFSET_X			100
+# define OFFSET_Y			100
 # define PUT(x, y, color)	mlx_pixel_put(libx->mlx, libx->win, x, y, color);
 # define ABS(x)				x < 0 ? -x : x
 # define MAX(x, y)			x > y ? x : y
@@ -61,6 +62,6 @@ typedef struct	s_prog
 void				line(t_point x1, t_point x2, long color, t_libx *libx);
 int					transform(int keycode, void *arg);
 void				draw(t_matrix *matrix, long color, t_libx *libx);
-t_point				*tab_of_points(int nb, int space, int rows, int cols);
+int					tab_of_points(int space, t_matrix *matrix);
 
 #endif

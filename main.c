@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 14:52:02 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/28 19:06:10 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,15 @@ int		main(void)
 	
 	libx.mlx = mlx_init();
 	libx.win = mlx_new_window(libx.mlx, 400, 400, "fdf");
-	points = tab_of_points(20, 20, 4, 4);
-	matrix = (t_matrix){20, 4, 4, points};
+	if (!(points = tab_of_points(20, &matrix)))
+	{
+		printf("error with map\n");
+		return (1);
+	}
 	prog = (t_prog){&libx, &matrix};
 	draw(&matrix, 0x0000FF, &libx);
 	mlx_key_hook(libx.win, transform, &prog);
 	mlx_loop(libx.mlx);
 	free(points);
+	return (0);
 }
