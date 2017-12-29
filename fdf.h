@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 19:29:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/28 20:05:47 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 # include "fcntl.h"
 # include "stdlib.h"
 
-# define SIZE_X				800
-# define SIZE_Y				800
-# define OFFSET_X			100
-# define OFFSET_Y			100
-# define PUT(x, y, color)	mlx_pixel_put(libx->mlx, libx->win, x, y, color);
+# define SIZE_X				1600
+# define SIZE_Y				1600
+# define OFFSET_X			500
+# define OFFSET_Y			500
+# define SPACE				30
+# define PUT(x, y, color)		mlx_pixel_put(libx->mlx, libx->win, x, y, color);
 # define ABS(x)				x < 0 ? -x : x
 # define MAX(x, y)			x > y ? x : y
 
@@ -73,5 +74,6 @@ void				line(t_point x1, t_point x2, long color, t_libx *libx);
 int					transform(int keycode, void *arg);
 void				draw(t_matrix *matrix, long color, t_libx *libx);
 int					tab_of_points(int space, t_matrix *matrix);
+void				event_manager(int keycode, t_matrix *matrix);
 
 #endif

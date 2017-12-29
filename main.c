@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 19:29:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/29 12:26:09 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	draw(t_matrix *matrix, long color, t_libx *libx)
 	{
 		if (i % cols != cols - 1)
 			line(points[i], points[i + 1], color, libx);
-		if (i < nb - rows)
-			line(points[i], points[i + rows], color, libx);
+		if (i < nb - cols)
+			line(points[i], points[i + cols], color, libx);
 		++i;
 	}
 }
@@ -52,21 +52,20 @@ void	draw(t_matrix *matrix, long color, t_libx *libx)
 int		main(void)
 {
 	t_libx		libx;
-	t_point 	*points;
 	t_matrix 	matrix;
 	t_prog		prog;
 	
 	libx.mlx = mlx_init();
 	libx.win = mlx_new_window(libx.mlx, SIZE_X, SIZE_Y, "fdf");
-	if (!(points = tab_of_points(20, &matrix)))
+	if (!tab_of_points(SPACE, &matrix))
 	{
 		printf("error with map\n");
 		return (1);
 	}
 	prog = (t_prog){&libx, &matrix};
-	draw(&matrix, 0x0000FF, &libx);
+	draw(&matrix, 0x00FF00, &libx);
 	mlx_key_hook(libx.win, transform, &prog);
 	mlx_loop(libx.mlx);
-	free(points);
+	free(matrix.points);
 	return (0);
 }

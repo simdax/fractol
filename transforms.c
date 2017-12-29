@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 19:22:05 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/28 20:30:06 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,6 @@ void	event_manager(int keycode, t_matrix *matrix)
 		rotate(matrix, 20, (t_point){100, 100, 0});
 	else if (keycode == 46)
 		scale(matrix, 1.5);
+	else if (keycode == 47)
+		exit(1);
 }
