@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:49:25 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 14:51:09 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/29 15:03:47 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ void	draw_line(t_line line, int reverse, long color, t_libx *libx)
 	while (x != line.steps)
 	{
 		if (reverse)
-		{
-			PUT(line.origin.x + y, line.origin.y + x, color);
-		}
+			mlx_pixel_put(libx->mlx, libx->win,
+						line.origin.x + y, line.origin.y + x,
+						color);
 		else
-			PUT(line.origin.x + x, line.origin.y + y, color);
+			mlx_pixel_put(libx->mlx, libx->win,
+						line.origin.x + x, line.origin.y + y,
+						color);
 		x += line.steps > 0 ? 1 : -1;
 		y += line.slope;
 	}

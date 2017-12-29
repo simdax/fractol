@@ -6,22 +6,22 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 20:30:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/29 14:41:36 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	translateX(t_point *points, int of, int len)
+void	translate(t_matrix *matrix, int x, int y)
 {
-	while (--len >= 0)
-		points[len].x += of;
-}
+	int len;
 
-void	translateY(t_point *points, int of, int len)
-{
+	len = matrix->len;
 	while (--len >= 0)
-		points[len].y += of;
+	{
+		matrix->points[len].x += x;
+		matrix->points[len].y += y;
+	}
 }
 
 void	scale(t_matrix *matrix, float factor)
@@ -39,28 +39,33 @@ void	scale(t_matrix *matrix, float factor)
 void	rotate(t_matrix *matrix, float angle, t_point origin)
 {
 	float		tmpx;
-	float	 	tmpy;
+	float		tmpy;
 	int			len;
-	t_point		*points;
 
 	len = matrix->len;
 	while (--len >= 0)
 	{
 		tmpx = matrix->points[len].x - origin.x;
 		tmpy = matrix->points[len].y - origin.y;
-		matrix->points[len].x = tmpx * cos(angle) - tmpy * sin(angle) + origin.x;
-		matrix->points[len].y = tmpy * cos(angle) + tmpx * sin(angle) + origin.y;
+		matrix->points[len].x =
+			tmpx * cos(angle) - tmpy * sin(angle) + origin.x;
+		matrix->points[len].y =
+			tmpy * cos(angle) + tmpx * sin(angle) + origin.y;
 	}
 }
 
 void	event_manager(int keycode, t_matrix *matrix)
 {
-	/* if (keycode == 46) */
-	/* 	translate(matrix->points, 1, len); */
-	if (keycode == 124)
-		rotate(matrix, 20, (t_point){100, 100, 0});
-	else if (keycode == 46)
+	if (keycode == 82)
+		rotate(matrix, 18, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
+	else if (keycode == 126)
 		scale(matrix, 1.5);
-	else if (keycode == 47)
-		exit(1);
+	else if (keycode == 124)
+		translate(matrix, -10, 0);
+	else if (keycode == 125)
+		scale(matrix, 0.75);
+	else if (keycode == 123)
+		translate(matrix, 10, 0);
+	else if (keycode == 53)
+		exit(0);
 }
