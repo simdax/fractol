@@ -1,14 +1,20 @@
-LFT_SRCS := gnl/get_next_line.c ft_bzero.c ft_memcpy.c ft_strchr.c ft_strdup.c ft_strlen.c ft_strsplit.c ft_atoi.c ft_issep.c ft_isdigit.c ft_lstadd.c ft_lstnew.c free_strsplit.c ft_print_2d.c ft_putstr.c ft_putchar.c
-SRCS := main.c shapes.c transforms.c parse.c $(addprefix libft/, $(LFT_SRCS))
+SRCS := main.c projection.c shapes.c transforms.c parse.c color.c
 LD := -L libft
-INC := -I libft -I libft/gnl
+INC := -I libft -I libft/gnl -I .
 FLAGS := -g3 $(LD) $(INC) -Werror -Wextra -Wall
 NAME := fdf
+OBJS := $(SRCS:.c=.o)
+
+vpath %.c srcs
 
 all: $(NAME)
 
-$(NAME):
-	gcc $(FLAGS) -lft -lmlx -framework OpenGL -framework AppKit $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	@make -C libft
+	gcc $(FLAGS) -lft -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
+
+%.o: %.c
+	gcc $(INC) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)
