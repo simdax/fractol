@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/29 14:41:36 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/03 17:57:29 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,20 @@ void	rotate(t_matrix *matrix, float angle, t_point origin)
 
 void	event_manager(int keycode, t_matrix *matrix)
 {
-	if (keycode == 82)
+	if (keycode == 123)
 		rotate(matrix, 18, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
-	else if (keycode == 126)
-		scale(matrix, 1.5);
 	else if (keycode == 124)
-		translate(matrix, -10, 0);
+		rotate(matrix, -18, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
+	else if (keycode == 126)
+	{
+		scale(matrix, 1.25);
+		translate(matrix, SIZE_X / -8, SIZE_Y / -8);
+	}
 	else if (keycode == 125)
+	{
 		scale(matrix, 0.75);
-	else if (keycode == 123)
-		translate(matrix, 10, 0);
+		translate(matrix, SIZE_X / 8, SIZE_Y / 8);
+	}
 	else if (keycode == 53)
 		exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/03 13:06:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/03 17:11:19 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@
 # include "stdio.h"
 # include "fcntl.h"
 # include "stdlib.h"
+# include "unistd.h"
 # include "libft.h"
 
 # define SIZE_X				1600
 # define SIZE_Y				1600
-# define OFFSET_X			500
-# define OFFSET_Y			500
-# define SPACE				10
 
 typedef struct	s_rgb {
 	float 		r;
@@ -44,12 +42,6 @@ typedef struct	s_color
 	t_hsl	hsl;
 }				t_color;
 
-typedef struct		s_libx
-{
-	void			*win;
-	void			*mlx;
-}					t_libx;
-
 typedef struct		s_point
 {
 	float			x;
@@ -64,6 +56,18 @@ typedef struct		s_line
 	int				steps;
 }					t_line;
 
+typedef struct	s_color_point
+{
+	t_point		point;
+	t_color		color;
+}				t_color_point;
+
+typedef struct		s_libx
+{
+	void			*win;
+	void			*mlx;
+}					t_libx;
+
 typedef struct		s_matrix
 {
 	int			len;
@@ -76,6 +80,7 @@ typedef struct		s_prog
 {
 	t_libx		*libx;
 	t_matrix	*matrix;
+	t_color		color;
 }					t_prog;
 
 typedef struct		s_map
@@ -86,13 +91,15 @@ typedef struct		s_map
 	int			*values;
 }					t_map;
 
-t_map				*parse(char *file_name);
-void				line(t_point x1, t_point x2, long color, t_libx *libx);
-int					transform(int keycode, void *arg);
-void				draw(t_matrix *matrix, long color, t_libx *libx);
-int					tab_of_points(char *file, int space, t_matrix *matrix);
-void				event_manager(int keycode, t_matrix *matrix);
-t_color				create_color(float h, float s, float l);
-int					color2hex(t_color c);
+int			tab_of_points(char *file, t_matrix *matrix);
+t_map		*parse(char *file_name);
+void		draw(t_matrix *matrix, t_color c, t_libx *libx);
+void		line(t_point x1, t_point x2, t_color color, t_libx *libx);
+void		event_manager(int keycode, t_matrix *matrix);
+int			transform(int keycode, void *arg);
+t_color		create_color(float h, float s, float l);
+int			color2hex(t_color c);
+int			hsl2hex(float h, float s, float l);
+t_color		update(t_color c, float h, float s, float l);
 
 #endif

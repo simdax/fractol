@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:37:00 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/03 13:49:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/03 18:01:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,20 @@ t_rgb		hsl2rgb(float hue, float sat, float light)
 	t_rgb rgb;
 
 	c = (1 - fabs(2 * light - 1)) * sat;
-	x = c * (1 - fabs(fmod(hue / 60,  2) - 1));
+	x = c * (1 - fabs(fmod(hue / 60, 2) - 1));
 	m = light - c / 2;
-	rgb = (0 <= hue && hue <= 60) ?	(t_rgb){c, x, 0} :
-	(60 <= hue && hue <= 120) ?		(t_rgb){x, c, 0} :
-	(120 <= hue && hue <= 180) ?	(t_rgb){0, c, x} :
-	(180 <= hue && hue <= 240) ?	(t_rgb){0, x, c} :
-	(240 <= hue && hue <= 300) ?	(t_rgb){x, 0, c} :
-	(300 <= hue && hue <= 360) ?	(t_rgb){c, 0, x} :
-	(t_rgb){};
+	if (0 <= hue && hue <= 60)
+		rgb = (t_rgb){c, x, 0};
+	else if (60 <= hue && hue <= 120)
+		rgb = (t_rgb){x, c, 0};
+	else if (120 <= hue && hue <= 180)
+		rgb = (t_rgb){0, c, x};
+	else if (180 <= hue && hue <= 240)
+		rgb = (t_rgb){0, x, c};
+	else if (240 <= hue && hue <= 300)
+		rgb = (t_rgb){x, 0, c};
+	else if (300 <= hue && hue <= 360)
+		rgb = (t_rgb){c, 0, x};
 	rgb.r = (rgb.r + m) * 255;
 	rgb.g = (rgb.g + m) * 255;
 	rgb.b = (rgb.b + m) * 255;
@@ -47,7 +52,7 @@ t_color		create_color(float h, float s, float l)
 	return (color);
 }
 
-int		color2hex(t_color c)
+int			color2hex(t_color c)
 {
 	long res;
 
@@ -57,20 +62,14 @@ int		color2hex(t_color c)
 	return (res);
 }
 
-/* int main() */
-/* { */
-/* 	t_color c; */
+int			hsl2hex(float h, float s, float l)
+{
+	return (color2hex(create_color(h, s, l)));
+}
 
-/* 	c = create_color(37, 0.15, 0.5); */
-/* 	printf("%#x\n", color2hex(c)); */
-/* 	c = create_color(37, 0.15, 0.15); */
-/* 	printf("%#x\n", color2hex(c)); */
-/* 	c = create_color(37, 0.915, 0.5); */
-/* 	printf("%#x\n", color2hex(c)); */
-/* 	c = create_color(37, 0.515, 0.5); */
-/* 	printf("%#x\n", color2hex(c)); */
-/* 	c = create_color(237, 0.15, 0.5); */
-/* 	printf("%#x\n", color2hex(c)); */
-/* 	c = create_color(137, 0.15, 0.5); */
-/* 	printf("%#x\n", color2hex(c)); */
-/* } */
+t_color		update(t_color c, float h, float s, float l)
+{
+	c.hsl.h += h;
+	c.rgb = hsl2rgb(c.hsl.h, c.hsl.s, c.hsl.l);
+	return (c);
+}

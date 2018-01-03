@@ -1,8 +1,8 @@
+NAME := fdf
 SRCS := main.c projection.c shapes.c transforms.c parse.c color.c
 LD := -L libft
 INC := -I libft -I libft/gnl -I .
 FLAGS := -g3 $(LD) $(INC) -Werror -Wextra -Wall
-NAME := fdf
 OBJS := $(SRCS:.c=.o)
 
 vpath %.c srcs
@@ -14,7 +14,7 @@ $(NAME): $(OBJS)
 	gcc $(FLAGS) -lft -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
 
 %.o: %.c
-	gcc $(INC) -c $< -o $@
+	gcc -g3 $(INC) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)

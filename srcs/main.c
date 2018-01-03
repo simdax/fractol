@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/03 13:49:33 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/03 17:16:12 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int		transform(int keycode, void *arg)
 	t_prog			*prog;
 
 	prog = (t_prog*)arg;
-	draw(prog->matrix, 0x000000, prog->libx);
+	draw(prog->matrix, create_color(0, 0, 0), prog->libx);
 	event_manager(keycode, prog->matrix);
-	draw(prog->matrix, 0x00FF00, prog->libx);
+	draw(prog->matrix, prog->color, prog->libx);
 	return (0);
 }
 
-void	draw(t_matrix *matrix, long color, t_libx *libx)
+void	draw(t_matrix *matrix, t_color color, t_libx *libx)
 {
 	int		i;
 	int		nb;
@@ -53,16 +53,16 @@ int		main(int argc, char **argv)
 	t_prog		prog;
 	t_color		color;
 
-	color = create_color(24, 0.82, 0.591);
-	if (argc > 1 && !tab_of_points(argv[1], SPACE, &matrix))
+	color = create_color(80, 0.82, 0.59);
+	if (argc > 1 && !tab_of_points(argv[1], &matrix))
 	{
 		printf("error with map\n");
 		return (1);
 	}
 	libx.mlx = mlx_init();
 	libx.win = mlx_new_window(libx.mlx, SIZE_X, SIZE_Y, "fdf");
-	prog = (t_prog){&libx, &matrix};
-	draw(&matrix, color2hex(color), &libx);
+	prog = (t_prog){&libx, &matrix, color};
+	draw(&matrix, color, &libx);
 	mlx_key_hook(libx.win, transform, &prog);
 	mlx_loop(libx.mlx);
 	free(matrix.points);
