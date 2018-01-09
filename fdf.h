@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/03 17:11:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/09 16:31:53 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@
 # include "unistd.h"
 # include "libft.h"
 
-# define SIZE_X				1600
-# define SIZE_Y				1600
+# define SIZE_X	1600
+# define SIZE_Y	1600
 
-typedef struct	s_rgb {
-	float 		r;
-	float 		g;
-	float 		b;
+typedef struct	s_rgb
+{
+	float		r;
+	float		g;
+	float		b;
 }				t_rgb;
 
-typedef struct	s_hsl {
+typedef struct	s_hsl
+{
 	float		h;
 	float		s;
 	float		l;
@@ -42,19 +44,19 @@ typedef struct	s_color
 	t_hsl	hsl;
 }				t_color;
 
-typedef struct		s_point
+typedef struct	s_point
 {
 	float			x;
 	float			y;
 	float			z;
-}					t_point;
+}				t_point;
 
-typedef struct		s_line
+typedef struct	s_line
 {
 	t_point			origin;
 	float			slope;
 	int				steps;
-}					t_line;
+}				t_line;
 
 typedef struct	s_color_point
 {
@@ -62,44 +64,44 @@ typedef struct	s_color_point
 	t_color		color;
 }				t_color_point;
 
-typedef struct		s_libx
+typedef struct	s_libx
 {
 	void			*win;
 	void			*mlx;
-}					t_libx;
+}				t_libx;
 
-typedef struct		s_matrix
+typedef struct	s_matrix
 {
 	int			len;
 	int			cols;
 	int			rows;
 	t_point		*points;
-}					t_matrix;
+}				t_matrix;
 
-typedef struct		s_prog
+typedef struct	s_prog
 {
 	t_libx		*libx;
 	t_matrix	*matrix;
 	t_color		color;
-}					t_prog;
+}				t_prog;
 
-typedef struct		s_map
+typedef struct	s_map
 {
 	int			len;
 	int			rows;
 	int			cols;
 	int			*values;
-}					t_map;
+}				t_map;
 
-int			tab_of_points(char *file, t_matrix *matrix);
-t_map		*parse(char *file_name);
-void		draw(t_matrix *matrix, t_color c, t_libx *libx);
-void		line(t_point x1, t_point x2, t_color color, t_libx *libx);
-void		event_manager(int keycode, t_matrix *matrix);
-int			transform(int keycode, void *arg);
-t_color		create_color(float h, float s, float l);
-int			color2hex(t_color c);
-int			hsl2hex(float h, float s, float l);
-t_color		update(t_color c, float h, float s, float l);
+int				tab_of_points(char *file, t_matrix *matrix);
+t_map			*parse(char *file_name);
+void			draw(t_matrix *matrix, t_color c, t_libx *libx);
+void			line(t_point x1, t_point x2, t_color color, t_libx *libx);
+void			event_manager(int keycode, t_matrix *matrix);
+int				transform(int keycode, void *arg);
+t_color			create_color(float h, float s, float l);
+int				color2hex(t_color c);
+int				hsl2hex(float h, float s, float l);
+t_color			update(t_color c, float h, float s, float l);
 
 #endif

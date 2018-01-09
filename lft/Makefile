@@ -5,7 +5,6 @@ FILES = ft_strrm.c ft_nbrsize.c ft_strany.c ft_lstreduce.c ft_all_perms.c ft_ato
 OBJS = $(FILES:%.c=%.o)
 CC = gcc -g
 
-include list/make.dep
 include gnl/make.dep
 
 INCLUDES := $(addprefix -I, $(INCLUDES))
