@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:42:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/09 14:51:13 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/09 16:34:27 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstaddlast(t_list **list, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-void				ft_lstiter2(t_list *lst, void (*f)(t_list *elem, void *args), void *mem);
+void				ft_lstiter2(t_list *lst,
+								void (*f)(t_list *elem, void *args),
+								void *mem);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 void				*ft_memset(void *b, int c, size_t len);
@@ -43,7 +45,7 @@ int					ft_memcmp(const void *s, const void *s2, size_t len);
 void				*ft_memalloc(size_t size);
 void				*ft_memdel(void **ap);
 
-size_t					ft_nbrsize(int nbr);
+size_t				ft_nbrsize(int nbr);
 int					ft_atoi(const char *str);
 char				*ft_itoa(int n);
 int					ft_isalpha(int c);
