@@ -11,7 +11,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C libft
-	gcc $(FLAGS) -lft -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
+	gcc $(FLAGS) -lft -lmlx -framework OpenGL -framework AppKit libft/*o $(OBJS) -o $(NAME)
 
 %.o: %.c
 	gcc -g3 $(INC) -c $< -o $@

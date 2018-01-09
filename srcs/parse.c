@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:51:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/03 17:57:16 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/09 14:52:35 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_map		*parse(char *file_name)
 		if (!map->rows)
 			map->cols = map->len;
 		++map->rows;
-		free_strsplit(split - map->cols);
+		ft_free_strsplit(split - map->cols);
 		free(line);
 	}
 	map->values = res;
