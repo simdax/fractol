@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 15:54:06 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/29 12:53:38 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/31 12:45:18 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static int	copy(char **stat, char **line)
 
 int			get_next_line(int fd, char **line)
 {
-	static char	*stat[OPEN_MAX];
+	static char	*stat[FOPEN_MAX];
 	char		buf[BUFF_SIZE + 1];
 	char		*realloc;
 	int			ret;
 	int			len;
 
-	if (!line || fd < 0 || fd > OPEN_MAX)
+	if (!line || fd < 0 || fd > FOPEN_MAX)
 		return (-1);
 	if (stat[fd] && ft_strlen(stat[fd]) > 0 && copy(&stat[fd], line))
 		return (1);

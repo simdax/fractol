@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 19:22:23 by scornaz           #+#    #+#             */
-/*   Updated: 2017/11/11 13:29:24 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/31 13:27:38 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,19 @@ void	ft_lstadd(t_list **alst, t_list *new)
 {
 	new->next = *alst;
 	*alst = new;
+}
+
+void	ft_lstaddlast(t_list **list, t_list *new)
+{
+  t_list *head;
+
+  head = *list;
+  if (head)
+    {
+      while (head->next)
+        head = head->next;
+      head->next = new;
+    }
+  else
+    *list = new;
 }

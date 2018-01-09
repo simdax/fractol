@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_strsplit.c                                    :+:      :+:    :+:   */
+/*   ft_lstgetmax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/29 12:13:12 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/29 13:09:32 by scornaz          ###   ########.fr       */
+/*   Created: 2018/01/08 17:45:36 by simdax            #+#    #+#             */
+/*   Updated: 2018/01/08 17:58:00 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes.h"
 
-void			free_strsplit(char **str)
+int	ft_lstgetmax(t_list *list, int val,
+                      int (*f)(t_list *el, int val))
 {
-	char **cpy;
-
-	cpy = str;
-	while (*str)
+	while (list)
 	{
-		free(*str);
-		++str;
+          val = f(list, val);
+		list = list->next;
 	}
-	free(cpy);
+        return (val);
 }

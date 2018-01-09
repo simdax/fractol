@@ -6,11 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 18:40:18 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/11 18:40:24 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/08 18:06:06 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_nbrsize(int nbr)
+#include "libft.h"
+
+size_t	ft_nbrsize(int nbr)
 {
 	int	res;
 

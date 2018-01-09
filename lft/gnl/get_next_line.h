@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 10:53:07 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/28 15:07:20 by scornaz          ###   ########.fr       */
+/*   Updated: 2017/12/31 12:45:57 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <sys/types.h>
 # include <limits.h>
+# include <stdio.h>
 # include "../libft.h"
 # include "unistd.h"
 # include <fcntl.h>

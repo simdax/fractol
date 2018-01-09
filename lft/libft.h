@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:42:22 by scornaz           #+#    #+#             */
-/*   Updated: 2017/12/29 12:25:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/09 14:51:13 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <string.h>
 # include <stdlib.h>
+# include <stdarg.h>
 
 typedef struct		s_list
 {
@@ -27,7 +28,9 @@ t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lstaddlast(t_list **list, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+void				ft_lstiter2(t_list *lst, void (*f)(t_list *elem, void *args), void *mem);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 void				*ft_memset(void *b, int c, size_t len);
@@ -40,7 +43,7 @@ int					ft_memcmp(const void *s, const void *s2, size_t len);
 void				*ft_memalloc(size_t size);
 void				*ft_memdel(void **ap);
 
-int					ft_nbrsize(int nbr);
+size_t					ft_nbrsize(int nbr);
 int					ft_atoi(const char *str);
 char				*ft_itoa(int n);
 int					ft_isalpha(int c);
@@ -89,7 +92,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
-void				free_strsplit(char **str);
+void				ft_free_strsplit(char **str);
 int					ft_strany(char c, char*str);
 
 unsigned int		ft_fact(unsigned int nb);

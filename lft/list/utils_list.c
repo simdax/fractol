@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: simdax </var/spool/mail/simdax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 17:23:00 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/06 18:58:53 by simdax           ###   ########.fr       */
+/*   Created: 2018/01/08 14:58:00 by simdax            #+#    #+#             */
+/*   Updated: 2018/01/08 15:04:27 by simdax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include <unistd.h>
+#include "includes.h"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
+void	ft_lstprint(t_list *el)
 {
-  if (*alst)
-    del((*alst)->content, (*alst)->content_size);
-  free(*alst);
-  *alst = NULL;
+  write(1, el->content, ft_strlen(el->content));
+  write(1, " ", 1);
 }
