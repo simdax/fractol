@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:51:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/09 15:04:13 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/15 10:10:01 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,18 @@ static int	check(char *file)
 	return (ret == 0);
 }
 
+static int	check_rows(t_map *map)
+{
+	static int size = 0;
+
+	++size;
+	if (!map->rows)
+		map->cols = map->len;
+	if (map->len / size != map->cols)
+		return (0);
+	return (1);
+}
+
 t_map		*parse(char *file_name)
 {
 	int		fd;
@@ -62,8 +74,7 @@ t_map		*parse(char *file_name)
 	int		*res;
 	t_map	*map;
 
-	if (!(fd = gros_malloc(&map, &res, file_name))
-		|| !check(file_name))
+	if (!(fd = gros_malloc(&map, &res, file_name)) || !check(file_name))
 		return (0);
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -73,8 +84,8 @@ t_map		*parse(char *file_name)
 			res[map->len] = ft_atoi(*split++);
 			++map->len;
 		}
-		if (!map->rows)
-			map->cols = map->len;
+		if (!(check_rows(map)))
+			return (0);
 		++map->rows;
 		ft_free_strsplit(split - map->cols);
 		free(line);

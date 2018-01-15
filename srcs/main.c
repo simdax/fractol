@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/03 17:16:12 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/12 17:28:02 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		main(int argc, char **argv)
 	t_color		color;
 
 	color = create_color(80, 0.82, 0.59);
-	if (argc > 1 && !tab_of_points(argv[1], &matrix))
+	if (argc != 2 || !tab_of_points(argv[1], &matrix))
 	{
 		printf("error with map\n");
 		return (1);
