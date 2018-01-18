@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/09 16:31:53 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/18 10:34:19 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "stdlib.h"
 # include "unistd.h"
 # include "libft.h"
+# include <get_next_line.h>
 
 # define SIZE_X	1600
 # define SIZE_Y	1600

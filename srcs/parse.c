@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:51:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/15 10:32:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/18 10:34:51 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,25 @@ int			gros_malloc(t_map **map, int **res, char *file_name)
 
 static int	check(char *file)
 {
-	char	*msg;
-	char	*buffer;
-	int		fd;
-	int		ret;
+	char *line;
+	char *msg;
+	int ret;
+	int fd;
 
-	buffer = (char*)malloc(64);
-	if ((fd = open(file, O_RDONLY)) != -1)
+	fd = open(file, O_RDONLY);
+	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		while ((ret = read(fd, buffer, 64)) > 0)
+		while (*line)
 		{
-			while (*buffer)
+			if (!ft_strchr("0123456789 \n,xabcdefgABCDEFG", *line))
 			{
-				if (!ft_strchr("0123456789 \n,xabcdefgABCDEFG", *buffer))
-				{
-					msg = "Need a valid file of a grid of numbers. Pervert.\n";
-					write(2, msg, ft_strlen(msg));
-					return (0);
-				}
-				++buffer;
+				msg = "Need a valid file of a grid of numbers. Pervert.\n";
+				write(2, msg, ft_strlen(msg));
+				return (0);
 			}
-			buffer -= 64;
+			++line;
 		}
 	}
-	free(buffer);
 	return (ret == 0);
 }
 

@@ -1,5 +1,5 @@
-HERE = gnl
-FFILES = get_next_line.c
+HERE := gnl
+FFILES := get_next_line.c
 
 FILES += $(addprefix $(HERE)/, $(FFILES))
 INCLUDES += $(HERE)

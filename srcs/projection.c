@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:07:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/15 10:24:28 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/18 09:46:00 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_point		proj_ortho(int nb, int space, int cols, int rows)
 	float	offset_x;
 	float	offset_y;
 
-	offset_x = (SIZE_X - cols * space) / 1.3;
+	offset_x = (SIZE_X - cols * space) / 1.25;
 	offset_y = (SIZE_Y - rows * space) / 8;
 	return ((t_point){
 			offset_x + (space) * (nb % cols) - (space * (nb / cols)),
