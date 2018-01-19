@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/19 10:55:58 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/19 19:01:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,15 @@ typedef struct	s_color_point
 	t_color		color;
 }				t_color_point;
 
-typedef struct	s_libx
+typedef struct	s_map
 {
-	void			*win;
-	void			*mlx;
-}				t_libx;
+	int			len;
+	int			rows;
+	int			cols;
+	float		c1;
+	float		c2;
+	int			*values;
+}				t_map;
 
 typedef struct	s_matrix
 {
@@ -78,7 +82,14 @@ typedef struct	s_matrix
 	int			cols;
 	int			rows;
 	t_point		*points;
+	t_map		*map;
 }				t_matrix;
+
+typedef struct	s_libx
+{
+	void			*win;
+	void			*mlx;
+}				t_libx;
 
 typedef struct	s_prog
 {
@@ -87,14 +98,7 @@ typedef struct	s_prog
 	t_color		color;
 }				t_prog;
 
-typedef struct	s_map
-{
-	int			len;
-	int			rows;
-	int			cols;
-	int			*values;
-}				t_map;
-
+t_point			proj_ortho(int nb, const t_map *z_points);
 int				tab_of_points(char *file, t_matrix *matrix);
 t_map			*parse(char *file_name);
 void			draw(t_matrix *matrix, t_color c, t_libx *libx);

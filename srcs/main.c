@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/19 14:24:39 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/19 18:58:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int		main(int argc, char **argv)
 	draw(&matrix, color, &libx);
 	mlx_key_hook(libx.win, transform, &prog);
 	mlx_loop(libx.mlx);
+	free(matrix.map->values);
+	free(matrix.map);
 	free(matrix.points);
 	return (0);
 }
