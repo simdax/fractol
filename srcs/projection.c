@@ -6,11 +6,17 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:07:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/19 11:50:28 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/19 14:25:10 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+print_p(t_point point, int nb)
+{
+	printf("%d : %f et %f\n", nb, point.x, point.y);
+	fflush(stdout);
+}
 
 t_point		proj_ortho(int nb, int cols, int rows, int z)
 {
@@ -24,12 +30,13 @@ t_point		proj_ortho(int nb, int cols, int rows, int z)
 	offset_x = (SIZE_X / 10);
 	width = (SIZE_X - offset_x * 2) / (rows - 1);
 	heigth = (SIZE_Y - offset_y * 2) / (cols - 1);
-	int x = (offset_x + (width * (nb % rows)));
-	int y = (offset_y + (heigth * (nb / cols)));
+	float x = (offset_x + (width * (nb % cols)));
+	float y = (offset_y + (heigth * (nb / cols)));
 	point = (t_point){
 		x * -sqrt(2) / 4 + y,
 		x * sqrt(2) / 4 - z,
 		z};
+//	print_p(point, nb);
 	return (point);
 }
 

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/15 10:32:31 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/19 14:24:39 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	draw(t_matrix *matrix, t_color color, t_libx *libx)
 	points = matrix->points;
 	while (i < nb - 1)
 	{
-		if (i % cols != cols - 1)
+		if (i % cols < cols - 1)
 			line(points[i], points[i + 1], color, libx);
 		if (i < nb - cols)
 			line(points[i], points[i + cols], color, libx);
