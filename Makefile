@@ -28,6 +28,9 @@ re: fclean
 test: re
 	./$(NAME) "maps/42.fdf"
 
+simple: re
+	./$(NAME) "simple"
+
 debug: re
 	lldb $(NAME) "maps/42.fdf"
 

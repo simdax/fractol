@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/03 17:57:29 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/19 11:21:24 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ void	scale(t_matrix *matrix, float factor)
 
 void	rotate(t_matrix *matrix, float angle, t_point origin)
 {
-	float		tmpx;
-	float		tmpy;
+	double		tmpx;
+	double		tmpy;
 	int			len;
 
 	len = matrix->len;
 	while (--len >= 0)
 	{
-		tmpx = matrix->points[len].x - origin.x;
-		tmpy = matrix->points[len].y - origin.y;
+		tmpx = origin.x - matrix->points[len].x;
+		tmpy = origin.y - matrix->points[len].y;
 		matrix->points[len].x =
 			tmpx * cos(angle) - tmpy * sin(angle) + origin.x;
 		matrix->points[len].y =
@@ -57,9 +57,9 @@ void	rotate(t_matrix *matrix, float angle, t_point origin)
 void	event_manager(int keycode, t_matrix *matrix)
 {
 	if (keycode == 123)
-		rotate(matrix, 18, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
+		rotate(matrix, M_PI / 4, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
 	else if (keycode == 124)
-		rotate(matrix, -18, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
+		rotate(matrix, M_PI / -4, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
 	else if (keycode == 126)
 	{
 		scale(matrix, 1.25);

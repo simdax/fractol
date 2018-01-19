@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:51:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/18 10:34:51 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/19 10:39:53 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,24 @@ int			gros_malloc(t_map **map, int **res, char *file_name)
 static int	check(char *file)
 {
 	char *line;
-	char *msg;
+	char *cpy;
 	int ret;
 	int fd;
 
 	fd = open(file, O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
+		cpy = line;
 		while (*line)
 		{
 			if (!ft_strchr("0123456789 \n,xabcdefgABCDEFG", *line))
 			{
-				msg = "Need a valid file of a grid of numbers. Pervert.\n";
-				write(2, msg, ft_strlen(msg));
+				write(2, "need a squared grid\n", 20);
 				return (0);
 			}
 			++line;
 		}
+		free(cpy);
 	}
 	return (ret == 0);
 }
