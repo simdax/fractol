@@ -6,13 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:07:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/19 11:35:13 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/19 11:50:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point		proj_ortho(int nb, int cols, int rows)
+t_point		proj_ortho(int nb, int cols, int rows, int z)
 {
 	float offset_x;
 	float offset_y;
@@ -24,18 +24,19 @@ t_point		proj_ortho(int nb, int cols, int rows)
 	offset_x = (SIZE_X / 10);
 	width = (SIZE_X - offset_x * 2) / (rows - 1);
 	heigth = (SIZE_Y - offset_y * 2) / (cols - 1);
+	int x = (offset_x + (width * (nb % rows)));
+	int y = (offset_y + (heigth * (nb / cols)));
 	point = (t_point){
-		offset_x + (width * (nb % rows)),
-		offset_y + (heigth * (nb / cols)),
-		0};
+		x * -sqrt(2) / 4 + y,
+		x * sqrt(2) / 4 - z,
+		z};
 	return (point);
 }
 
 void		z_proj(int nb, t_point *points, t_map *z_points)
 {
-	points[nb] = proj_ortho(nb, z_points->cols, z_points->rows);
-	points[nb].z = z_points->values[nb];
-	points[nb].y -= points[nb].z * (5);
+	points[nb] = proj_ortho(nb, z_points->cols, z_points->rows, z_points->values[nb]);
+//	points[nb].y -= points[nb].z * (5);
 }
 
 int			tab_of_points(char *file, t_matrix *matrix)
