@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/18 10:34:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/19 09:45:49 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct	s_line
 	t_point			origin;
 	float			slope;
 	int				steps;
+	t_point			goal;
 }				t_line;
 
 typedef struct	s_color_point
