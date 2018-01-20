@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:07:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 17:36:50 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 17:51:03 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ int			tab_of_points(char *file, t_matrix *matrix)
 		res[nb] = projection(nb, matrix);
 	matrix->points = res;
 	center_matrix(matrix);
-	print_infos_matrix(matrix);
 	return (1);
 }

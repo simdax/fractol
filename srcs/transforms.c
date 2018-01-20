@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 17:37:53 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 17:55:22 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ void	change_proj(t_matrix *matrix, float c1, float c2)
 	res = (t_point*)malloc(sizeof(t_point) * nb);
 	matrix->c1 += c1;
 	matrix->c2 += c2;
+	if (matrix->c1 <= 0)
+		matrix->c1 = 0.1;
+	if (matrix->c2 <= 0)
+		matrix->c2 = 0.1;
 	while (--nb >= 0)
 		res[nb] = projection(nb, matrix);
 	free(matrix->points);
