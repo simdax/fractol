@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 20:04:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 20:42:03 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct	s_matrix
 typedef struct	s_img
 {
 	void		*ptr;
-	char		*data;
+	int			*data;
 	int			bpp;
 	int			endian;
 	int			sl;	
