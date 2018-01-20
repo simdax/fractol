@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 17:37:02 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 18:32:05 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "libft.h"
 # include <get_next_line.h>
 
-# define SIZE_X	1200
-# define SIZE_Y	1200
+# define SIZE_X	2000
+# define SIZE_Y	2000
 
 typedef struct	s_rgb
 {

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:07:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 17:51:03 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 18:34:39 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_point		projection(int nb, t_matrix *matrix)
 	z_points = matrix->map;
 	x = ((z_points->width * (nb % z_points->cols)));
 	y = ((z_points->height * (nb / z_points->cols)));
+	printf("%f et %f\n", x, y);
 	return (matrix->proj_f(x, y, z_points->values[nb], matrix));
 }
 
@@ -63,6 +64,8 @@ int			tab_of_points(char *file, t_matrix *matrix)
 	matrix->c2 = 1;
 	matrix->map->width = ((SIZE_X) / (z_points->cols - 1)) / 5;
 	matrix->map->height = ((SIZE_Y) / (z_points->rows - 1)) / 5;
+	matrix->map->width = matrix->map->width ? matrix->map->width : 1;
+	matrix->map->height = matrix->map->height ? matrix->map->height : 1;
 	matrix->proj_f = ortho;
 	res = (t_point*)malloc(sizeof(t_point) * nb);
 	while (--nb >= 0)
