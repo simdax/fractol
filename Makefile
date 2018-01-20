@@ -3,7 +3,7 @@ SRCS := main.c projection.c shapes.c transforms.c parse.c color.c print.c
 LD := -L lft
 INC := -I lft -I lft/gnl -I .
 FLAGS := -g3 $(LD) $(INC) -Werror -Wextra -Wall
-OBJS := $(SRCS:.c=.o)
+OBJS := $(SRCS:%.c=objs/%.o)
 
 vpath %.c srcs
 
@@ -13,8 +13,11 @@ $(NAME): $(OBJS)
 	@make -C lft
 	gcc $(FLAGS) -lft -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
 
-%.o: %.c
+objs/%.o: %.c | objs
 	gcc -g3 $(INC) -c $< -o $@
+
+objs:
+	mkdir -p objs
 
 clean:
 	rm -rf $(OBJS)
