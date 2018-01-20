@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 18:32:05 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 20:04:06 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,20 @@ typedef struct	s_matrix
 	t_map		*map;
 }				t_matrix;
 
+typedef struct	s_img
+{
+	void		*ptr;
+	char		*data;
+	int			bpp;
+	int			endian;
+	int			sl;	
+}				t_img;
+	
 typedef struct	s_libx
 {
-	void			*win;
-	void			*mlx;
+	void		*win;
+	void		*mlx;
+	t_img		*img;
 }				t_libx;
 
 typedef struct	s_prog

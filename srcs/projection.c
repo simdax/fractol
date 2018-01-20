@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:07:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 18:34:39 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 19:32:24 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void		center_matrix(t_matrix *matrix)
 	x1 = matrix->points[cols * (rows - 1)].x;
 	x2 = matrix->points[cols - 1].x;
 	matrix->width = (x2 + x1) / 2;
-	matrix->height = matrix->points[cols * rows - 1].y - matrix->points[0].y;
+	x1 = matrix->points[cols * rows - 1].y;
+	x2 = matrix->points[0].y;
+	matrix->height = x1 - x2;
 	translate(matrix, (SIZE_X / 2 - matrix->width), (SIZE_Y - matrix->height) / 2);
 }
 
