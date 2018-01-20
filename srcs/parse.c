@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:51:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/19 10:39:53 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 14:16:59 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int			gros_malloc(t_map **map, int **res, char *file_name)
 
 static int	check(char *file)
 {
-	char *line;
-	char *cpy;
-	int ret;
-	int fd;
+	char	*line;
+	char	*cpy;
+	int		ret;
+	int		fd;
 
 	fd = open(file, O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)

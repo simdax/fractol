@@ -6,43 +6,30 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:07:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 12:52:40 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 14:20:09 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void print_p(t_point point, int nb)
+t_point		ortho(float x, float y, float z, t_matrix *matrix)
 {
-	printf("%d : %f et %f\n", nb, point.x, point.y);
-	fflush(stdout);
+	return ((t_point){
+			x * matrix->c1 - y * matrix->c2,
+				x * 1 / matrix->c1 + y * 2 / matrix->c2 - z * 5,
+				z});
 }
 
-t_point		proj_ortho(int nb, const t_map *z_points)
+t_point		projection(int nb, t_matrix *matrix)
 {
-	int cols = z_points->cols;
-	int rows = z_points->rows;
-	int z = z_points->values[nb];
-	float offset_x;
-	float offset_y;
-	float width;
-	float heigth;
-	t_point point;
+	t_map	*z_points;
+	float	x;
+	float	y;
 
-	offset_x = 0;
-	offset_y = 0;
-	width = ((SIZE_X) / (cols - 1)) / 5;
-	heigth = ((SIZE_Y) / (rows - 1)) / 5;
-	float x = (offset_x + (width * (nb % cols)));
-	float y = (offset_y + (heigth * (nb / cols)));
-	point = (t_point){
-		//x, y,		
-		/* x * sqrt(2) / 4 + y, */
-		/* x * -sqrt(2) / 4 - z, */
-		x * z_points->c1 - y * z_points->c2,
-		offset_y + x * 1 / z_points->c1 + y * 2 / z_points->c2 - z * 5,
-		z};
-	return (point);
+	z_points = matrix->map;
+	x = ((z_points->width * (nb % z_points->cols)));
+	y = ((z_points->height * (nb / z_points->cols)));
+	return (matrix->proj_f(x, y, z_points->values[nb], matrix));
 }
 
 int			tab_of_points(char *file, t_matrix *matrix)
@@ -56,13 +43,20 @@ int			tab_of_points(char *file, t_matrix *matrix)
 		return (0);
 	nb = z_points->len;
 	matrix->map = z_points;
-	matrix->map->c1 = 3;
-	matrix->map->c2 = 1;
-
+	matrix->c1 = 3;
+	matrix->c2 = 1;
+	matrix->map->width = ((SIZE_X) / (z_points->cols - 1)) / 5;
+	matrix->map->height = ((SIZE_Y) / (z_points->rows - 1)) / 5;
+	matrix->proj_f = ortho;
+	matrix->height = matrix->map->height * matrix->map->cols +
+		matrix->c1 * matrix->map->height;
+	matrix->width = matrix->map->width * matrix->map->rows +
+		matrix->c2 * matrix->map->width;
 	res = (t_point*)malloc(sizeof(t_point) * nb);
 	while (--nb >= 0)
-		res[nb] = proj_ortho(nb, matrix->map);
+		res[nb] = projection(nb, matrix);
 	matrix->points = res;
-	translate(matrix, SIZE_X / 2, SIZE_Y / 2);
+	translate(matrix, (SIZE_X - matrix->width) / 2,
+			(SIZE_Y - matrix->height) / 2);
 	return (1);
 }

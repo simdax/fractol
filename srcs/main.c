@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 12:51:59 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 14:14:46 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ int		main(int argc, char **argv)
 	t_color		color;
 
 	color = create_color(80, 0.82, 0.59);
-	if (argc != 2 || !tab_of_points(argv[1], &matrix))
+	if (argc != 2 || !ft_strcmp(argv[1], "/dev/zero") ||
+		!tab_of_points(argv[1], &matrix))
 	{
-		printf("error with map\n");
+		ft_putstr("error with map\n");
 		return (1);
 	}
 	libx.mlx = mlx_init();

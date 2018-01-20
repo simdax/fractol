@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 12:52:07 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 13:48:54 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,19 @@ typedef struct	s_map
 	int			len;
 	int			rows;
 	int			cols;
-	float		c1;
-	float		c2;
 	int			*values;
+	float		width;
+	float		height;
 }				t_map;
 
 typedef struct	s_matrix
 {
+	float		c1;
+	float		c2;
 	float		width;
 	float		height;
+	t_point		(*proj_f)(float, float, float,
+						struct s_matrix*);
 	t_point		*points;
 	t_map		*map;
 }				t_matrix;
@@ -97,7 +101,7 @@ typedef struct	s_prog
 	t_color		color;
 }				t_prog;
 
-t_point			proj_ortho(int nb, const t_map *z_points);
+t_point			projection(int nb, t_matrix *matrix);
 int				tab_of_points(char *file, t_matrix *matrix);
 t_map			*parse(char *file_name);
 void			draw(t_matrix *matrix, t_color c, t_libx *libx);

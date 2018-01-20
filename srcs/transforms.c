@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 12:53:25 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 14:20:40 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,23 @@ void	rotate(t_matrix *matrix, float angle, t_point origin)
 
 void	change_proj(t_matrix *matrix, float c1, float c2)
 {
-	int nb = matrix->map->len;
-	t_point *res = (t_point*)malloc(sizeof(t_point) * nb);
+	int		nb;
+	t_point *res;
 
-	matrix->map->c1 += c1;
-	matrix->map->c2 += c2;
+	nb = matrix->map->len;
+	res = (t_point*)malloc(sizeof(t_point) * nb);
+	matrix->c1 += c1;
+	matrix->c2 += c2;
 	while (--nb >= 0)
-		res[nb] = proj_ortho(nb, matrix->map);
+		res[nb] = projection(nb, matrix);
 	free(matrix->points);
 	matrix->points = res;
-	translate(matrix, SIZE_X / 2, SIZE_Y / 2);
+	translate(matrix, (SIZE_X - matrix->width) / 2,
+			(SIZE_Y - matrix->height) / 2);
 }
 
 void	event_manager(int keycode, t_matrix *matrix)
 {
-	printf("touch %d\n", keycode); 	fflush(stdout);
 	if (keycode == 123)
 		rotate(matrix, M_PI / 4, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
 	else if (keycode == 124)
