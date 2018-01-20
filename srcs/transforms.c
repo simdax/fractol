@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/19 19:08:30 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 12:53:25 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	translate(t_matrix *matrix, int x, int y)
 {
 	int len;
 
-	len = matrix->len;
+	len = matrix->map->len;
 	while (--len >= 0)
 	{
 		matrix->points[len].x += x;
@@ -28,7 +28,7 @@ void	scale(t_matrix *matrix, float factor)
 {
 	int len;
 
-	len = matrix->len;
+	len = matrix->map->len;
 	while (--len >= 0)
 	{
 		matrix->points[len].x *= factor;
@@ -42,7 +42,7 @@ void	rotate(t_matrix *matrix, float angle, t_point origin)
 	double		tmpy;
 	int			len;
 
-	len = matrix->len;
+	len = matrix->map->len;
 	while (--len >= 0)
 	{
 		tmpx = origin.x - matrix->points[len].x;
@@ -56,7 +56,7 @@ void	rotate(t_matrix *matrix, float angle, t_point origin)
 
 void	change_proj(t_matrix *matrix, float c1, float c2)
 {
-	int nb = matrix->len;
+	int nb = matrix->map->len;
 	t_point *res = (t_point*)malloc(sizeof(t_point) * nb);
 
 	matrix->map->c1 += c1;
@@ -65,6 +65,7 @@ void	change_proj(t_matrix *matrix, float c1, float c2)
 		res[nb] = proj_ortho(nb, matrix->map);
 	free(matrix->points);
 	matrix->points = res;
+	translate(matrix, SIZE_X / 2, SIZE_Y / 2);
 }
 
 void	event_manager(int keycode, t_matrix *matrix)

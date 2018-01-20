@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:07:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/19 19:19:35 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 12:52:40 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,18 @@ t_point		proj_ortho(int nb, const t_map *z_points)
 	float heigth;
 	t_point point;
 
-	offset_x = 300;
-	offset_y = 300;
+	offset_x = 0;
+	offset_y = 0;
 	width = ((SIZE_X) / (cols - 1)) / 5;
 	heigth = ((SIZE_Y) / (rows - 1)) / 5;
 	float x = (offset_x + (width * (nb % cols)));
 	float y = (offset_y + (heigth * (nb / cols)));
 	point = (t_point){
-		//x, y,
-		
+		//x, y,		
 		/* x * sqrt(2) / 4 + y, */
 		/* x * -sqrt(2) / 4 - z, */
-
 		x * z_points->c1 - y * z_points->c2,
 		offset_y + x * 1 / z_points->c1 + y * 2 / z_points->c2 - z * 5,
-
 		z};
 	return (point);
 }
@@ -59,15 +56,13 @@ int			tab_of_points(char *file, t_matrix *matrix)
 		return (0);
 	nb = z_points->len;
 	matrix->map = z_points;
-	matrix->map->c1 = 1;
-	matrix->map->c2 = 2;
+	matrix->map->c1 = 3;
+	matrix->map->c2 = 1;
 
-	matrix->len = z_points->len;
-	matrix->cols = z_points->cols;
-	matrix->rows = z_points->rows;
 	res = (t_point*)malloc(sizeof(t_point) * nb);
 	while (--nb >= 0)
 		res[nb] = proj_ortho(nb, matrix->map);
 	matrix->points = res;
+	translate(matrix, SIZE_X / 2, SIZE_Y / 2);
 	return (1);
 }
