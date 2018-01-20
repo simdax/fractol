@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 20:43:21 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 20:57:22 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	draw(t_matrix *matrix, t_color color, t_libx *libx)
 		if (i < nb - cols)
 			line(points[i], points[i + cols], color, libx);
 		++i;
-	}
+	}	
+	mlx_put_image_to_window(libx->mlx, libx->win, libx->img->ptr, 0,0);
 }
 
 int		main(int argc, char **argv)

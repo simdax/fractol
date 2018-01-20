@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:07:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 19:32:24 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 21:00:54 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_point		projection(int nb, t_matrix *matrix)
 	z_points = matrix->map;
 	x = ((z_points->width * (nb % z_points->cols)));
 	y = ((z_points->height * (nb / z_points->cols)));
-	printf("%f et %f\n", x, y);
 	return (matrix->proj_f(x, y, z_points->values[nb], matrix));
 }
 
