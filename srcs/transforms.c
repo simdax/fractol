@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 14:20:40 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 17:37:53 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ void	change_proj(t_matrix *matrix, float c1, float c2)
 		res[nb] = projection(nb, matrix);
 	free(matrix->points);
 	matrix->points = res;
-	translate(matrix, (SIZE_X - matrix->width) / 2,
-			(SIZE_Y - matrix->height) / 2);
+	center_matrix(matrix);
 }
 
 void	event_manager(int keycode, t_matrix *matrix)

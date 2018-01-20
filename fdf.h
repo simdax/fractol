@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 13:48:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 17:37:02 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct	s_prog
 	t_color		color;
 }				t_prog;
 
+void			center_matrix(t_matrix *matrix);
 t_point			projection(int nb, t_matrix *matrix);
 int				tab_of_points(char *file, t_matrix *matrix);
 t_map			*parse(char *file_name);

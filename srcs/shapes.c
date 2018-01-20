@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:49:25 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 14:20:29 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/20 17:46:35 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ void			draw_line(t_line line, int reverse, t_color color, t_libx *libx)
 	y = 0;
 	x = 0;
 	z1 = line.origin.z * 5;
-	z2 = line.goal.z * 5;
+	z2 = line.goal.z * 10;
 	z_slope = (z2 - z1) * (1 / (float)line.steps);
+	if (reverse) 
+		z_slope = (z1 - z2) * (1 / (float)line.steps);
+	z_slope = (z2 - z1) * (1 / (float)line.steps); 
 	while (x != line.steps)
 	{
 		if (reverse)
@@ -39,7 +42,7 @@ void			draw_line(t_line line, int reverse, t_color color, t_libx *libx)
 		else
 			mlx_pixel_put(libx->mlx, libx->win,
 						line.origin.x + x, line.origin.y + y,
-						color2hex(update(color, z2 + (x * z_slope), 0, 0)));
+						color2hex(update(color, z1 + (x * z_slope), 0, 0)));
 		x += line.steps > 0 ? 1 : -1;
 		y += line.slope;
 	}
