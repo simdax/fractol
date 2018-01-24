@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 16:34:23 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 18:00:46 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,16 @@ void	change_proj(t_matrix *matrix, float c1, float c2)
 	nb = matrix->map->len;
 	res = (t_point*)malloc(sizeof(t_point) * nb);
 	matrix->c1 += c1;
-	matrix->c2 += c2;
-	if (matrix->c1 <= 0)
+	if (matrix->c1 >= 10)
+		matrix->zoom = 10;
+	matrix->c1 += c1;
+	if (matrix->c1 <= 0.1)
 		matrix->c1 = 0.1;
-	if (matrix->c2 <= 0)
+	matrix->c2 += c1;
+	if (matrix->c2 >= 10)
+		matrix->c2 = 10;
+	matrix->c2 += c1;
+	if (matrix->c2 <= 0.1)
 		matrix->c2 = 0.1;
 	while (--nb >= 0)
 		res[nb] = projection(nb, matrix);
@@ -82,20 +88,22 @@ void	event_manager(int keycode, t_matrix *matrix)
 		rotate(matrix, M_PI / -2, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
 	else if (keycode == 126)
 	{
-		matrix->zoom *= 1.5;
-		scale(matrix, 1.5);
-		translate(matrix, SIZE_X / -4, SIZE_Y / -4);
+		matrix->zoom *= 1.05;
+		if (matrix->zoom >= 10)
+			matrix->zoom = 10;
+		change_proj(matrix, 0, 0);
 	}
 	else if (keycode == 125)
 	{
-		matrix->zoom *= 0.5;
-		scale(matrix, 0.5);
-		translate(matrix, SIZE_X / 4, SIZE_Y / 4);
+		matrix->zoom /= 1.05;
+		if (matrix->zoom <= 0.1)
+			matrix->zoom = 0.1;
+		change_proj(matrix, 0, 0);
 	}
 	else if (keycode == 84)
-		change_proj(matrix, 0.1, 0.1);
+		change_proj(matrix, 0.01, 0.01);
 	else if (keycode == 83)
-		change_proj(matrix, -0.1, -0.1);
+		change_proj(matrix, -0.01, -0.01);
 	else if (keycode == 53)
 		exit(0);
 }
