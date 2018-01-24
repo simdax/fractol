@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:07:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 21:00:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 17:38:19 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 t_point		ortho(float x, float y, float z, t_matrix *matrix)
 {
+	z = z > 50 ? 50 : z;
 	return ((t_point){
-			x * matrix->c1 - y * matrix->c2,
-				x * 1 / matrix->c1 + y * 2 / matrix->c2 - z * 5,
-				z});
+			(x * matrix->c1 - y * matrix->c2) * matrix->zoom,
+			matrix->zoom * (x * 1 / matrix->c1 + y * 2 / matrix->c2 - z * 5),
+			z});
 }
 
 t_point		projection(int nb, t_matrix *matrix)
@@ -34,20 +35,20 @@ t_point		projection(int nb, t_matrix *matrix)
 
 void		center_matrix(t_matrix *matrix)
 {
-	int cols;
-	int rows;
-	float x1;
-	float x2;
-	
+	int		cols;
+	int		rows;
+	float	x1;
+	float	x2;
+
 	cols = matrix->map->cols;
 	rows = matrix->map->rows;
 	x1 = matrix->points[cols * (rows - 1)].x;
 	x2 = matrix->points[cols - 1].x;
 	matrix->width = (x2 + x1) / 2;
 	x1 = matrix->points[cols * rows - 1].y;
-	x2 = matrix->points[0].y;
-	matrix->height = x1 - x2;
-	translate(matrix, (SIZE_X / 2 - matrix->width), (SIZE_Y - matrix->height) / 2);
+	matrix->height = x1;
+	translate(matrix, (SIZE_X / 2 - matrix->width),
+			(SIZE_Y - matrix->height) / 2);
 }
 
 int			tab_of_points(char *file, t_matrix *matrix)
@@ -61,6 +62,7 @@ int			tab_of_points(char *file, t_matrix *matrix)
 		return (0);
 	nb = z_points->len;
 	matrix->map = z_points;
+	matrix->zoom = 1;
 	matrix->c1 = 3;
 	matrix->c2 = 1;
 	matrix->map->width = ((SIZE_X) / (z_points->cols - 1)) / 5;

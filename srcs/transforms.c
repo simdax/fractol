@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 17:55:22 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 16:34:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,25 @@ void	change_proj(t_matrix *matrix, float c1, float c2)
 void	event_manager(int keycode, t_matrix *matrix)
 {
 	if (keycode == 123)
-		rotate(matrix, M_PI / 4, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
+		rotate(matrix, M_PI / 2, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
 	else if (keycode == 124)
-		rotate(matrix, M_PI / -4, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
+		rotate(matrix, M_PI / -2, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
 	else if (keycode == 126)
+	{
+		matrix->zoom *= 1.5;
 		scale(matrix, 1.5);
+		translate(matrix, SIZE_X / -4, SIZE_Y / -4);
+	}
 	else if (keycode == 125)
+	{
+		matrix->zoom *= 0.5;
 		scale(matrix, 0.5);
+		translate(matrix, SIZE_X / 4, SIZE_Y / 4);
+	}
 	else if (keycode == 84)
-		change_proj(matrix, 0.1, 0);
+		change_proj(matrix, 0.1, 0.1);
 	else if (keycode == 83)
-		change_proj(matrix, 0, 0.1);
-	else if (keycode == 86)
-		change_proj(matrix, -0.1, 0);
-	else if (keycode == 87)
-		change_proj(matrix, 0, -0.1);
+		change_proj(matrix, -0.1, -0.1);
 	else if (keycode == 53)
 		exit(0);
 }

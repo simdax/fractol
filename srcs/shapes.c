@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 20:59:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/20 20:59:11 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/24 17:38:36 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,24 @@ void			fill_img_pixel(int *img, int color, int x, int y)
 
 void			draw_line(t_line line, int reverse, t_color color, t_libx *libx)
 {
-	float x;
-	float y;
-	float z_slope;
-	float z1;
-	float z2;
+	t_rien	args;
 
-	y = 0;
-	x = 0;
-	z1 = line.origin.z * 5;
-	z2 = line.goal.z * 5;
-	z_slope = (z2 - z1) * (1 / (float)line.steps);
-	if (reverse) 
-		z_slope = (z1 - z2) * (1 / (float)line.steps);
-	z_slope = (z2 - z1) * (1 / (float)line.steps); 
-	while (x != line.steps)
+	args = (t_rien){0, 0, line.origin.z * 5, line.goal.z * 5};
+	args.z_slope = (args.z2 - args.z1) * (1 / (float)line.steps);
+	while (args.x != line.steps)
 	{
 		if (reverse)
 			fill_img_pixel(libx->img->data,
-						   color2hex(update(color, z1 + (x * z_slope), 0, 0)),
-						   line.origin.x + y, line.origin.y + x);
-			else
+						color2hex(update(color, args.z1
+											+ (args.x * args.z_slope), 0, 0)),
+						line.origin.x + args.y, line.origin.y + args.x);
+		else
 			fill_img_pixel(libx->img->data,
-						   color2hex(update(color, z1 + (x * z_slope), 0, 0)),
-						   line.origin.x + x, line.origin.y + y);
-		x += line.steps > 0 ? 1 : -1;
-		y += line.slope;
+						color2hex(update(color, args.z1
+											+ (args.x * args.z_slope), 0, 0)),
+						line.origin.x + args.x, line.origin.y + args.y);
+		args.x += line.steps > 0 ? 1 : -1;
+		args.y += line.slope;
 	}
 }
 
