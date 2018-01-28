@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:14:03 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 18:00:46 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/28 18:07:31 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,28 +82,28 @@ void	change_proj(t_matrix *matrix, float c1, float c2)
 
 void	event_manager(int keycode, t_matrix *matrix)
 {
-	if (keycode == 123)
-		rotate(matrix, M_PI / 2, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
-	else if (keycode == 124)
-		rotate(matrix, M_PI / -2, (t_point){SIZE_X / 2, SIZE_Y / 2, 0});
-	else if (keycode == 126)
-	{
-		matrix->zoom *= 1.05;
-		if (matrix->zoom >= 10)
-			matrix->zoom = 10;
-		change_proj(matrix, 0, 0);
-	}
-	else if (keycode == 125)
-	{
-		matrix->zoom /= 1.05;
-		if (matrix->zoom <= 0.1)
-			matrix->zoom = 0.1;
-		change_proj(matrix, 0, 0);
-	}
-	else if (keycode == 84)
-		change_proj(matrix, 0.01, 0.01);
-	else if (keycode == 83)
-		change_proj(matrix, -0.01, -0.01);
-	else if (keycode == 53)
+	/* if (keycode == 123) */
+	/* 	rotate(matrix, M_PI / 2, (t_point){SIZE_X / 2, SIZE_Y / 2, 0}); */
+	/* else if (keycode == 124) */
+	/* 	rotate(matrix, M_PI / -2, (t_point){SIZE_X / 2, SIZE_Y / 2, 0}); */
+	/* else if (keycode == 126) */
+	/* { */
+	/* 	matrix->zoom *= 1.05; */
+	/* 	if (matrix->zoom >= 10) */
+	/* 		matrix->zoom = 10; */
+	/* 	change_proj(matrix, 0, 0); */
+	/* } */
+	/* else if (keycode == 125) */
+	/* { */
+	/* 	matrix->zoom /= 1.05; */
+	/* 	if (matrix->zoom <= 0.1) */
+	/* 		matrix->zoom = 0.1; */
+	/* 	change_proj(matrix, 0, 0); */
+	/* } */
+	/* else if (keycode == 84) */
+	/* 	change_proj(matrix, 0.01, 0.01); */
+	/* else if (keycode == 83) */
+	/* 	change_proj(matrix, -0.01, -0.01); */
+	/* else  */if (keycode == 53)
 		exit(0);
 }

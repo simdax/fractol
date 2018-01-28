@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 17:40:32 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/28 18:08:03 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int			transform(int keycode, void *arg)
 	t_prog			*prog;
 
 	prog = (t_prog*)arg;
-	draw(prog->matrix, create_color(0, 0, 0), prog->libx);
+//	draw(prog->matrix, create_color(0, 0, 0), prog->libx);
 	event_manager(keycode, prog->matrix);
-	draw(prog->matrix, prog->color, prog->libx);
-	mlx_put_image_to_window(prog->libx->mlx, prog->libx->win,
-						prog->libx->img->ptr, 0, 0);
+	/* draw(prog->matrix, prog->color, prog->libx); */
+	/* mlx_put_image_to_window(prog->libx->mlx, prog->libx->win, */
+	/* 					prog->libx->img->ptr, 0, 0); */
 	return (0);
 }
 
@@ -62,23 +62,24 @@ int			main(int argc, char **argv)
 	t_prog		prog;
 	t_color		color;
 
-	color = create_color(80, 0.82, 0.59);
-	if (argc != 2 || !ft_strcmp(argv[1], "/dev/zero") ||
-		!tab_of_points(argv[1], &matrix))
-	{
-		ft_putstr("error with map\n");
-		return (1);
-	}
+	/* color = create_color(80, 0.82, 0.59); */
+	/* if (argc != 2 || !ft_strcmp(argv[1], "/dev/zero") || */
+	/* 	!tab_of_points(argv[1], &matrix)) */
+	/* { */
+	/* 	ft_putstr("error with map\n"); */
+	/* 	return (1); */
+	/* } */
 	libx.mlx = mlx_init();
 	libx.win = mlx_new_window(libx.mlx, SIZE_X, SIZE_Y, "fdf");
 	libx.img = &(t_img){mlx_new_image(libx.mlx, SIZE_X, SIZE_Y)};
 	libx.img->data = (int*)mlx_get_data_addr(
 		libx.img->ptr, &(libx.img->bpp), &(libx.img->sl), &(libx.img->endian));
 	prog = (t_prog){&libx, &matrix, color};
-	draw(&matrix, color, &libx);
+	fractol(libx.img->data);
+	//draw(&matrix, color, &libx);
 	mlx_put_image_to_window(libx.mlx, libx.win, libx.img->ptr, 0, 0);
 	mlx_hook(libx.win, 2, 3, transform, &prog);
 	mlx_loop(libx.mlx);
-	free_matrix(&matrix);
+//	free_matrix(&matrix);
 	return (0);
 }

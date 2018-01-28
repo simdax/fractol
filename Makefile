@@ -1,5 +1,5 @@
-NAME := fdf
-SRCS := main.c projection.c shapes.c transforms.c parse.c color.c
+NAME := fractol
+SRCS := main.c projection.c shapes.c transforms.c parse.c color.c mandelbrot.c
 LD := -L lft
 INC := -I lft -I lft/gnl -I .
 FLAGS := -g3 $(LD) $(INC) -Werror -Wextra -Wall

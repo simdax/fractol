@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/24 17:29:11 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/28 17:57:48 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "libft.h"
 # include <get_next_line.h>
 
-# define SIZE_X 1500
+# define SIZE_X 1000
 # define SIZE_Y	1000
 
 typedef struct	s_rgb
@@ -123,6 +123,7 @@ typedef struct	s_rien
 	float z_slope;
 }				t_rien;
 
+void			fractol(int *buf);
 void			center_matrix(t_matrix *matrix);
 t_point			projection(int nb, t_matrix *matrix);
 int				tab_of_points(char *file, t_matrix *matrix);
