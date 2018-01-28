@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/28 17:57:48 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/28 19:58:00 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,22 @@ typedef struct	s_libx
 	t_img		*img;
 }				t_libx;
 
+typedef struct	s_fractal
+{
+	double		min_re;
+	double		max_re;
+	double		min_im;
+	double		max_im;
+	double		re_factor;
+	double		im_factor;
+	unsigned	max_iterations;
+}				t_fractal;
+
 typedef struct	s_prog
 {
 	t_libx		*libx;
 	t_matrix	*matrix;
-	t_color		color;
+	t_fractal	*set;
 }				t_prog;
 
 typedef struct	s_rien
@@ -123,7 +134,8 @@ typedef struct	s_rien
 	float z_slope;
 }				t_rien;
 
-void			fractol(int *buf);
+void			calc_set(t_fractal *set, int *buf);
+void			hydrate_set(t_fractal *set);
 void			center_matrix(t_matrix *matrix);
 t_point			projection(int nb, t_matrix *matrix);
 int				tab_of_points(char *file, t_matrix *matrix);
