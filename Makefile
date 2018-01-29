@@ -1,5 +1,5 @@
 NAME := fractol
-SRCS := main.c projection.c shapes.c transforms.c parse.c color.c mandelbrot.c
+SRCS := main.c projection.c shapes.c transforms.c parse.c color.c mandelbrot.c thread.c
 LD := -L lft
 INC := -I lft -I lft/gnl -I .
 FLAGS := -g3 $(LD) $(INC) -Werror -Wextra -Wall
@@ -29,11 +29,7 @@ re: fclean
 	make all
 
 test: re
-	./$(NAME) "maps/42.fdf"
-
-simple: re
-	./$(NAME) "simple"
+	./$(NAME)
 
 debug: re
-	lldb $(NAME) "maps/42.fdf"
-
+	lldb $(NAME)

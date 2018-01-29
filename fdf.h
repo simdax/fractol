@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/28 19:58:00 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/29 13:58:57 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "fcntl.h"
 # include "stdlib.h"
 # include "unistd.h"
+# include <pthread.h>
 # include "libft.h"
 # include <get_next_line.h>
 
@@ -134,7 +135,16 @@ typedef struct	s_rien
 	float z_slope;
 }				t_rien;
 
-void			calc_set(t_fractal *set, int *buf);
+typedef struct	s_thread
+{
+	t_fractal	*set;
+	int			*data;
+	int			from;
+	int			to;
+}				t_thread;
+
+int				parallelize(t_fractal *set, int *data);
+void			*calc_set(void *);//t_fractal *set, int *buf, int form, int to);
 void			hydrate_set(t_fractal *set);
 void			center_matrix(t_matrix *matrix);
 t_point			projection(int nb, t_matrix *matrix);
