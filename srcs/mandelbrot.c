@@ -6,19 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 17:53:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/29 13:59:08 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/29 16:58:19 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdlib.h>
 #include <unistd.h>
-
-/* inline void	hydrate_set(t_fractal *set) */
-/* { */
-/* 	prog->set->max_im = prog->set->min_im + (prog->set->max_re - prog->set->min_re) * */
-/* 		SIZE_Y / SIZE_X; */
-/* } */
 
 int		mandelbrot(int n, double c_re, double c_im)
 {
@@ -64,5 +58,7 @@ void		*calc_set(void *a)
 		}
 		++y;
 	}
+	printf("je suis fini et je suis %d \n", args->id);
+	fflush(stdout);
 	pthread_exit(0);
 }

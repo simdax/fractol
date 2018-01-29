@@ -6,29 +6,38 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:40:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/29 14:03:49 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/29 17:37:15 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-pthread_cond_t condition = PTHREAD_COND_INITIALIZER; /* Création de la condition */
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; /* Création du mutex */
-
-int	parallelize(t_fractal *set, int *data)
+int balance_du_gros_thread(t_fractal *set, int *data, int threads_nb)
 {
-	pthread_t thread_one;
-	pthread_t thread_two;
-	pthread_t thread_three;
-	pthread_t thread_four;
+	pthread_t	*threads;
+	t_thread	*io;
+	int			i;
+	int			u;
 
-	pthread_create (&thread_one, NULL, calc_set, &(t_thread){set, data, 0, SIZE_Y / 4});
-	pthread_create (&thread_two, NULL, calc_set, &(t_thread){set, data, SIZE_Y / 4 + 1, SIZE_Y / 2});
-	pthread_create (&thread_three, NULL, calc_set, &(t_thread){set, data, SIZE_Y / 2 + 1, SIZE_Y * 3 / 4});
-	pthread_create (&thread_four, NULL, calc_set, &(t_thread){set, data, (SIZE_Y * 3 / 4) + 1, SIZE_Y});
-	pthread_join (thread_one, NULL);
-	pthread_join (thread_two, NULL); /* Attente de la fin des threads */
-	pthread_join (thread_three, NULL);
-	pthread_join (thread_four, NULL); /* Attente de la fin des threads */
+	if (!(threads = malloc(sizeof(pthread_t) * threads_nb)))
+		return (0);
+	if (!(io = malloc(sizeof(t_thread) * threads_nb)))
+		return (0);
+	i = 0;
+	while (i < threads_nb)
+	{
+//		ft_memcpy(&io[i], &(t_thread){set, data, (SIZE_Y * i) / threads, (SIZE_Y * (i + 1)) / threads, i}, sizeof(t_thread));
+		io[i] = (t_thread){set, data, (SIZE_Y * i) / threads_nb, (SIZE_Y * (i + 1)) / threads_nb, i};
+		u = pthread_create(&threads[i], NULL, calc_set, &io[i]);
+		++i;
+	}
+	i = 0;
+	while (i < threads_nb)
+	{
+		pthread_join(threads[i], NULL);
+		++i;
+	}
+	free(threads);
+	free(io);
 	return (1);
 }
