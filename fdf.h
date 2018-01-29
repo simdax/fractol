@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/29 17:32:53 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/29 19:47:25 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,14 @@ typedef struct	s_libx
 	t_img		*img;
 }				t_libx;
 
+typedef struct	s_flags
+{
+	int	x;
+	int	y;
+	int	iterations;
+	int	color;
+}				t_flags;
+
 typedef struct	s_fractal
 {
 	double		min_re;
@@ -117,23 +125,8 @@ typedef struct	s_fractal
 	double		re_factor;
 	double		im_factor;
 	unsigned	max_iterations;
+	int			(*f)(int, double, double, t_flags*);
 }				t_fractal;
-
-typedef struct	s_prog
-{
-	t_libx		*libx;
-	t_matrix	*matrix;
-	t_fractal	*set;
-}				t_prog;
-
-typedef struct	s_rien
-{
-	float x;
-	float y;
-	float z1;
-	float z2;
-	float z_slope;
-}				t_rien;
 
 typedef struct	s_thread
 {
@@ -142,9 +135,20 @@ typedef struct	s_thread
 	int			from;
 	int			to;
 	int			id;
+	t_flags		*flags;
 }				t_thread;
 
-int				balance_du_gros_thread(t_fractal *set, int *data, int);
+typedef struct	s_prog
+{
+	t_libx		*libx;
+	t_matrix	*matrix;
+	t_fractal	*set;
+	int			color;
+}				t_prog;
+
+int				balance_du_gros_thread(t_fractal *set, int *data, t_flags *flags);
+int				julia(int n, double c_re, double c_im, t_flags *flags);
+int				mandelbrot(int n, double c_re, double c_im, t_flags *flags);
 void			*calc_set(void *);
 void			hydrate_set(t_fractal *set);
 void			center_matrix(t_matrix *matrix);
