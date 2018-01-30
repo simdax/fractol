@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 13:53:42 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 15:33:03 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,13 @@ typedef struct	s_libx
 	void		*win;
 	void		*mlx;
 	t_img		*img;
+	char		*name;
 }				t_libx;
 
 typedef struct	s_flags
 {
-	int			x;
-	int			y;
+	double		x;
+	double		y;
 	int			iterations;
 	int			color;
 }				t_flags;
@@ -141,7 +142,6 @@ typedef struct	s_thread
 typedef struct	s_prog
 {
 	t_libx		*libx;
-	t_matrix	*matrix;
 	t_fractal	*set;
 	t_flags		*flags;
 }				t_prog;
@@ -152,16 +152,12 @@ int				mandelbrot(int n, double c_re, double c_im, t_flags *flags);
 void			*calc_set(void *);
 void			hydrate_set(t_fractal *set);
 void			draw(t_prog *prog);
-
-/* void			center_matrix(t_matrix *matrix); */
-/* t_point			projection(int nb, t_matrix *matrix); */
-/* int				tab_of_points(char *file, t_matrix *matrix); */
-/* t_map			*parse(char *file_name); */
-/* void			line(t_point x1, t_point x2, t_color color, t_libx *libx); */
-/* void			event_manager(int keycode, t_matrix *matrix); */
-/* int				transform(int keycode, void *arg); */
-/* void			translate(t_matrix *matrix, int x, int y); */
-
+void			init_set(t_fractal *set);
+int				clos(void *d);
+void			go_f(int (*f)(int, double, double, t_flags*), t_prog *prog);
+int				keyb_hook(int keycode, void *data);
+int				mouse_hook(int button, int x, int y, void *data);
+int				mouse_move(int x, int y, void *d);
 t_color			create_color(float h, float s, float l);
 int				color2hex(t_color c);
 int				hsl2hex(float h, float s, float l);

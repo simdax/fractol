@@ -6,44 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 13:59:28 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 16:00:55 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-
-void		init_set(t_fractal *set);
-
-void	go_f(int (*f)(int, double, double, t_flags*), t_prog *prog)
-{
-	prog->set->f = f;
-	init_set(prog->set);
-	draw(prog);
-}
-
-int		keyb_hook(int keycode, void *data)
-{
-	t_prog	*prog;
-
-	prog = data;
-	if (keycode == 0)
-		go_f(mandelbrot, prog);
-	else if (keycode == 1)
-		go_f(julia, prog);
-	else if (keycode == 2)
-	{
-		prog->flags->color += 10;
-		if ((balance_du_gros_thread(prog->set, prog->libx->img->data,
-									prog->flags)))
-			mlx_put_image_to_window(prog->libx->mlx, prog->libx->win,
-									prog->libx->img->ptr, 0, 0);
-	}
-	else if (keycode == 3)
-		prog->flags->color -= 10;
-	else if (keycode == 53)
-		exit(0);
-	return (0);
-}
+#include "fractol.h"
 
 void	draw(t_prog *prog)
 {
@@ -55,37 +22,14 @@ void	draw(t_prog *prog)
 		exit(0);	
 }
 
-int		mouse_hook(int button, int x, int y, void *data)
-{
-	t_prog		*prog;
-	double		spanx;
-	double		spany;
-	double		xx;
-	double		yy;
+int			go(t_prog *prog);
 
-	prog = data;
-	spanx = (prog->set->max_re - prog->set->min_re);
-	spany = (prog->set->max_im - prog->set->min_im);
-	xx = (x / (double)(SIZE_X / 2) - 1) * spanx / 2;
-	yy = -(y / (double)(SIZE_Y / 2) - 1) * spany / 2;
-	prog->set->min_re += xx;
-	prog->set->max_re += xx;
-	prog->set->min_im += yy;
-	prog->set->max_im += yy;
-	prog->set->re_factor = spanx / (SIZE_X - 1);
-	prog->set->im_factor = spany / (SIZE_Y - 1);
-	draw(prog);
-	prog->set->min_re += spanx / 10;
-	prog->set->max_re -= spanx / 10;
-	prog->set->min_im += spany / 10;
-	prog->set->max_im -= spany / 10;
-	prog->set->max_iterations += 2;
-	return (0);
-}
-
-void		take_flags(int argc, char **argv, t_fractal *set)
+void		take_flags(char **argv, t_libx *libxs, t_prog *progs, t_fractal *sets)
 {
-	//
+	libxs->name = ft_strjoin("fractol : ", "4");
+	progs->libx = libxs;
+	progs->set = sets;
+	go(progs);
 }
 
 void		init_set(t_fractal *set)
@@ -94,52 +38,53 @@ void		init_set(t_fractal *set)
 	set->min_re = -1.0;
 	set->max_im = 1.0;
 	set->min_im = -1.0;
-	set->max_iterations = 10;
+	set->max_iterations = 30;
 	set->re_factor = (set->max_re - set->min_re) / (SIZE_X - 1);
 	set->im_factor = (set->max_im - set->min_im) / (SIZE_Y - 1);
 	return ;
 }
 
-int		io(int x, int y, void *d)
+int			go(t_prog *prog)
 {
-	t_prog	*prog;
-
-	prog = d;
-	if (prog->set->f == julia)
-	{
-		prog->flags->x = x;
-		prog->flags->x = y;
-		draw(prog);
-	}
-	return (0);
-}
-
-int		clos(void *d)
-{
-	printf("au revoir %p\n", d);
-	fflush(stdout);
+	prog->libx->win = mlx_new_window(prog->libx->mlx, SIZE_X, SIZE_Y, prog->libx->name);
+	prog->libx->img = &(t_img){mlx_new_image(prog->libx->mlx, SIZE_X, SIZE_Y)};
+	prog->libx->img->data = (int*)mlx_get_data_addr(
+		prog->libx->img->ptr, &(prog->libx->img->bpp), &(prog->libx->img->sl), &(prog->libx->img->endian));
+	init_set(prog->set);
+	prog->set->f = julia;
+	prog->flags = &(t_flags){0, 0, prog->set->max_iterations, 40};
+	draw(prog);
+	mlx_hook(prog->libx->win, 4, 4, mouse_hook, prog);
+	mlx_hook(prog->libx->win, 6, 0, mouse_move, prog);
+	mlx_hook(prog->libx->win, 2, 3, keyb_hook, prog);
+	mlx_hook(prog->libx->win, 17, 0, clos, prog);
 	return (0);
 }
 
 int			main(int argc, char **argv)
 {
-	t_libx		libx;
-	t_prog		prog;
-	t_fractal	set;
-	
-	libx.mlx = mlx_init();
-	libx.win = mlx_new_window(libx.mlx, SIZE_X, SIZE_Y, "fractol");
-	libx.img = &(t_img){mlx_new_image(libx.mlx, SIZE_X, SIZE_Y)};
-	libx.img->data = (int*)mlx_get_data_addr(
-		libx.img->ptr, &(libx.img->bpp), &(libx.img->sl), &(libx.img->endian));
-	init_set(&set);
-	set.f = julia;
-	prog = (t_prog){&libx, 0, &set, &(t_flags){0, 0, set.max_iterations, 40}};
-	draw(&prog);
-	mlx_hook(libx.win, 4, 4, mouse_hook, &prog);
-	mlx_hook(libx.win, 6, 0, io, &prog);
-	mlx_hook(libx.win, 2, 3, keyb_hook, &prog);
-	mlx_hook(libx.win, 17, 0, clos, &prog);
-	mlx_loop(libx.mlx);
-	return (0);
+	int			i;
+	void		*mlx;
+	t_libx		*libxs;
+	t_prog		*progs;
+	t_fractal	*sets;
+
+	if (argc == 1)
+		argc = 2;
+	else
+		++argv;
+	libxs = malloc(sizeof(t_libx) * (argc - 1));
+	progs = malloc(sizeof(t_prog) * (argc - 1));
+	sets = malloc(sizeof(t_fractal) * (argc - 1));
+	i = 0;
+	mlx = mlx_init();
+	while (*argv++)
+	{
+		libxs->mlx = mlx;
+		take_flags(argv, libxs, progs, sets);
+		++libxs;
+		++progs;
+		++sets;
+	}
+	mlx_loop(mlx);
 }

@@ -6,11 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:37:00 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/28 18:04:27 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 15:15:04 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 t_rgb		hsl2rgb(float hue, float sat, float light)
 {

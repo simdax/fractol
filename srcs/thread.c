@@ -6,11 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:40:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/29 19:28:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 15:15:25 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 int balance_du_gros_thread(t_fractal *set, int *data, t_flags *flags)
 {

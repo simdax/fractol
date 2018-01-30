@@ -1,8 +1,8 @@
 NAME := fractol
-SRCS := main.c color.c mandelbrot.c thread.c
+SRCS := main.c color.c mandelbrot.c thread.c callbacks.c
 LD := -L lft
-INC := -I lft -I lft/gnl -I .
-FLAGS := -g3 $(LD) $(INC) -Werror -Wextra -Wall
+INC := -I lft -I lft/gnl -I srcs
+FLAGS := -g3 $(LD) $(INC) -Werror -Wextra -Wall -O3 -flto -march=native
 OBJS := $(SRCS:%.c=objs/%.o)
 
 vpath %.c srcs
@@ -29,7 +29,7 @@ re: fclean
 	make all
 
 test: re
-	./$(NAME)
+	./$(NAME) io ia
 
 debug: re
 	lldb $(NAME)
