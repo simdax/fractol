@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 17:53:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 17:17:57 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 18:06:32 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int		mandelbrot(int n, double c_re, double c_im, t_flags *flags)
 		Z_re2 = Z_re * Z_re;
 		Z_im2 = Z_im * Z_im;
 		if (Z_re2 + Z_im2 > 2)
-			return (color2hex(create_color(Z_re2 * Z_im2 * flags->color, 0.3, 0.3)));
+			return (color2hex(create_color(Z_re2 * Z_im2 * flags->color1, 0.3, 0.3)));
 		Z_im = 2 * Z_re * Z_im + c_im;
 		Z_re = Z_re2 - Z_im2 + c_re;
 	}
-	return (0);
+	return (color2hex(create_color(flags->color2, Z_re2, Z_im2)));
 }
 
 int		julia(int n, double c_re, double c_im, t_flags *flags)
@@ -49,11 +49,11 @@ int		julia(int n, double c_re, double c_im, t_flags *flags)
 		Z_re2 = Z_re * Z_re;
 		Z_im2 = Z_im * Z_im;
 		if (Z_re2 + Z_im2 > 2)
-			return (color2hex(create_color(Z_re2 * Z_im2 * 50, 0.3, 0.3)));
+			return (color2hex(create_color(Z_re2 * Z_im2 * flags->color1, 0.3, 0.3)));
 		Z_im = 2 * Z_re * Z_im + flags->y;
 		Z_re = Z_re2 - Z_im2 + flags->x;
 	}
-	return (0);
+	return (color2hex(create_color(Z_re2 * Z_im2 * flags->color2, 0.3, 0.3)));;
 }
 
 void		*calc_set(void *a)
@@ -66,7 +66,6 @@ void		*calc_set(void *a)
 
 	args = a;
 	y = args->from;
-	printf("batard de threadeux %p", args->data);
 	while (y < args->to)
 	{
 		c_im = args->set->max_im - y * args->set->im_factor;

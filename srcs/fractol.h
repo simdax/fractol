@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 17:14:55 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 18:01:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "unistd.h"
 # include <pthread.h>
 # include "libft.h"
-# include <get_next_line.h>
 
 # define SIZE_X 1000
 # define SIZE_Y	1000
@@ -114,7 +113,8 @@ typedef struct	s_flags
 	double		x;
 	double		y;
 	int			iterations;
-	int			color;
+	int			color1;
+	int			color2;
 }				t_flags;
 
 typedef struct	s_fractal
@@ -154,6 +154,7 @@ void			hydrate_set(t_fractal *set);
 void			draw(t_prog *prog);
 void			init_set(t_fractal *set);
 int				clos(void *d);
+int				go(t_prog *prog);
 void			go_f(int (*f)(int, double, double, t_flags*), t_prog *prog);
 int				keyb_hook(int keycode, t_prog *data);
 int				mouse_hook(int button, int x, int y, t_prog *data);

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 17:25:31 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:54:25 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,22 @@ void	draw(t_prog *prog)
 		exit(0);
 }
 
-int			go(t_prog *prog);
-
-void		take_flags(char *argv, t_libx *libxs, t_prog *progs, t_fractal *sets)
+int		take_flags(char *argv, t_libx *libxs, t_prog *progs, t_fractal *sets)
 {
 	libxs->name = ft_strjoin("fractol : ", argv);
 	progs->libx = libxs;
 	progs->set = sets;
 	if (!ft_strcmp(argv, "julia"))
 		progs->set->f = julia;
-	if (!ft_strcmp(argv, "mandelbrot"))
+	else if (!ft_strcmp(argv, "mandelbrot"))
 		progs->set->f = mandelbrot;
+	else
+	{
+		printf("lapin compris %s", argv);
+		return (0);
+	}
 	go(progs);
+	return (1);
 }
 
 void		init_set(t_fractal *set)

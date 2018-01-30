@@ -1,7 +1,7 @@
 NAME := fractol
 SRCS := main.c color.c mandelbrot.c thread.c callbacks.c
 LD := -L lft
-INC := -I lft -I lft/gnl -I srcs
+INC := -I lft -I srcs
 FLAGS := $(LD) $(INC) -g3 -Werror -Wextra -Wall -O3 -flto -march=native
 OBJS := $(SRCS:%.c=objs/%.o)
 
@@ -29,7 +29,7 @@ re: fclean
 	make all
 
 test: re
-	./$(NAME) io ia
+	./$(NAME) mandelbrot
 
 debug: re
 	lldb $(NAME)
