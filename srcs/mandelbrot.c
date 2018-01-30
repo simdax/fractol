@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 17:53:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 15:15:15 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:17:57 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void		*calc_set(void *a)
 
 	args = a;
 	y = args->from;
+	printf("batard de threadeux %p", args->data);
 	while (y < args->to)
 	{
 		c_im = args->set->max_im - y * args->set->im_factor;

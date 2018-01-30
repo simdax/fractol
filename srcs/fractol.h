@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 15:33:03 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:14:55 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,9 +155,9 @@ void			draw(t_prog *prog);
 void			init_set(t_fractal *set);
 int				clos(void *d);
 void			go_f(int (*f)(int, double, double, t_flags*), t_prog *prog);
-int				keyb_hook(int keycode, void *data);
-int				mouse_hook(int button, int x, int y, void *data);
-int				mouse_move(int x, int y, void *d);
+int				keyb_hook(int keycode, t_prog *data);
+int				mouse_hook(int button, int x, int y, t_prog *data);
+int				mouse_move(int x, int y, t_prog *prog);
 t_color			create_color(float h, float s, float l);
 int				color2hex(t_color c);
 int				hsl2hex(float h, float s, float l);

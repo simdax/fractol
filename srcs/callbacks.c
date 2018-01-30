@@ -6,17 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 14:15:13 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 15:14:55 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:25:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		mouse_move(int x, int y, void *d)
+int		mouse_move(int x, int y, t_prog *prog)
 {
-	t_prog	*prog;
-
-	prog = d;
 	if (prog->set->f == julia)
 	{
 		prog->flags->x = (double)50 / x;
@@ -32,15 +29,13 @@ int		clos(void *d)
 	return (0);
 }
 
-int		mouse_hook(int button, int x, int y, void *data)
+int		mouse_hook(int button, int x, int y, t_prog *prog)
 {
-	t_prog		*prog;
 	double		spanx;
 	double		spany;
 	double		xx;
 	double		yy;
 
-	prog = data;
 	spanx = (prog->set->max_re - prog->set->min_re);
 	spany = (prog->set->max_im - prog->set->min_im);
 	xx = (x / (double)(SIZE_X / 2) - 1) * spanx / 2;
@@ -67,11 +62,8 @@ void	go_f(int (*f)(int, double, double, t_flags*), t_prog *prog)
 	draw(prog);
 }
 
-int		keyb_hook(int keycode, void *data)
+int		keyb_hook(int keycode, t_prog *prog)
 {
-	t_prog	*prog;
-
-	prog = data;
 	if (keycode == 0)
 		go_f(mandelbrot, prog);
 	else if (keycode == 1)

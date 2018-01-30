@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:40:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 15:15:25 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:19:16 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int balance_du_gros_thread(t_fractal *set, int *data, t_flags *flags)
 		return (0);
 	if (!(io = malloc(sizeof(t_thread) * flags->iterations)))
 		return (0);
+	printf("%d\n", flags->iterations);
 	i = 0;
 	while (i < flags->iterations)
 	{
-//ft_memcpy(&io[i], &(t_thread){set, data, (SIZE_Y * i) / threads, (SIZE_Y * (i + 1)) / threads, i}, sizeof(t_thread));
 		io[i] = (t_thread){set, data, (SIZE_Y * i) / flags->iterations, (SIZE_Y * (i + 1)) / flags->iterations, i, flags};
 		u = pthread_create(&threads[i], NULL, calc_set, &io[i]);
 		++i;
