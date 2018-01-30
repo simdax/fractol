@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 17:53:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/29 19:47:08 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 12:59:29 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int		julia(int n, double c_re, double c_im, t_flags *flags)
 		Z_im2 = Z_im * Z_im;
 		if (Z_re2 + Z_im2 > 2)
 			return (color2hex(create_color(Z_re2 * Z_im2 * 50, 0.3, 0.3)));
-		Z_im = 2 * Z_re * Z_im + 0.288;
-		Z_re = Z_re2 - Z_im2 + 0.353;
+		Z_im = 2 * Z_re * Z_im + flags->y;
+		Z_re = Z_re2 - Z_im2 + flags->x;
 	}
 	return (0);
 }

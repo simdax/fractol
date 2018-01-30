@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/29 19:47:25 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/30 13:53:42 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,10 @@ typedef struct	s_libx
 
 typedef struct	s_flags
 {
-	int	x;
-	int	y;
-	int	iterations;
-	int	color;
+	int			x;
+	int			y;
+	int			iterations;
+	int			color;
 }				t_flags;
 
 typedef struct	s_fractal
@@ -143,7 +143,7 @@ typedef struct	s_prog
 	t_libx		*libx;
 	t_matrix	*matrix;
 	t_fractal	*set;
-	int			color;
+	t_flags		*flags;
 }				t_prog;
 
 int				balance_du_gros_thread(t_fractal *set, int *data, t_flags *flags);
@@ -151,15 +151,17 @@ int				julia(int n, double c_re, double c_im, t_flags *flags);
 int				mandelbrot(int n, double c_re, double c_im, t_flags *flags);
 void			*calc_set(void *);
 void			hydrate_set(t_fractal *set);
-void			center_matrix(t_matrix *matrix);
-t_point			projection(int nb, t_matrix *matrix);
-int				tab_of_points(char *file, t_matrix *matrix);
-t_map			*parse(char *file_name);
-void			draw(t_matrix *matrix, t_color c, t_libx *libx);
-void			line(t_point x1, t_point x2, t_color color, t_libx *libx);
-void			event_manager(int keycode, t_matrix *matrix);
-int				transform(int keycode, void *arg);
-void			translate(t_matrix *matrix, int x, int y);
+void			draw(t_prog *prog);
+
+/* void			center_matrix(t_matrix *matrix); */
+/* t_point			projection(int nb, t_matrix *matrix); */
+/* int				tab_of_points(char *file, t_matrix *matrix); */
+/* t_map			*parse(char *file_name); */
+/* void			line(t_point x1, t_point x2, t_color color, t_libx *libx); */
+/* void			event_manager(int keycode, t_matrix *matrix); */
+/* int				transform(int keycode, void *arg); */
+/* void			translate(t_matrix *matrix, int x, int y); */
+
 t_color			create_color(float h, float s, float l);
 int				color2hex(t_color c);
 int				hsl2hex(float h, float s, float l);
