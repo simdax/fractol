@@ -6,13 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 14:54:32 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:40:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	draw(t_prog *prog)
+void		draw(t_prog *prog)
 {
 	if ((balance_du_gros_thread(prog->set, prog->libx->img->data,
 								prog->flags)))
@@ -22,7 +22,8 @@ void	draw(t_prog *prog)
 		exit(0);
 }
 
-int		take_flags(char *argv, t_libx *libxs, t_prog *progs, t_fractal *sets)
+int			take_flags(char *argv, t_libx *libxs, t_prog *progs,
+					t_fractal *sets)
 {
 	libxs->name = ft_strjoin("fractol : ", argv);
 	progs->libx = libxs;
@@ -56,19 +57,20 @@ void		init_set(t_fractal *set)
 
 int			go(t_prog *prog)
 {
-	prog->libx->win = mlx_new_window(prog->libx->mlx, SIZE_X, SIZE_Y, prog->libx->name);
+	prog->libx->win = mlx_new_window(prog->libx->mlx, SIZE_X, SIZE_Y,
+									prog->libx->name);
 	prog->libx->img = malloc(sizeof(t_img));
+	prog->flags = malloc(sizeof(t_flags));
 	prog->libx->img->ptr = mlx_new_image(prog->libx->mlx, SIZE_X, SIZE_Y);
 	prog->libx->img->data = (int*)mlx_get_data_addr(
-		prog->libx->img->ptr, &(prog->libx->img->bpp), &(prog->libx->img->sl), &(prog->libx->img->endian));
+		prog->libx->img->ptr, &(prog->libx->img->bpp),
+		&(prog->libx->img->sl), &(prog->libx->img->endian));
 	init_set(prog->set);
-	prog->flags = malloc(sizeof(t_flags));
-	*(prog->flags) = (t_flags){0, 0, 20, 40};
+	*(prog->flags) = (t_flags){0, 0, 20, 40, 40, 1.1};
 	draw(prog);
-	mlx_hook(prog->libx->win, 4, 4, mouse_hook, prog);
+	mlx_mouse_hook(prog->libx->win, mouse_hook, prog);
 	mlx_hook(prog->libx->win, 6, 0, mouse_move, prog);
 	mlx_hook(prog->libx->win, 2, 3, keyb_hook, prog);
-	mlx_hook(prog->libx->win, 17, 0, clos, prog);
 	return (0);
 }
 

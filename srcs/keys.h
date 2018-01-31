@@ -6,11 +6,16 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:05:10 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 12:08:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:38:16 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-enum KEYS {
-	A, S, D, F, H, G, Z, X, C, V, RIEN,  
+#ifndef KEYS_H
+# define KEYS_H
+
+enum	e_keys {
+	A, S, D, F, H, G, Z, X, C, V, RIEN,
 	B, Q, W, E, R, Y, T
 };
+
+#endif

@@ -6,13 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:40:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 17:43:00 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:40:36 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int balance_du_gros_thread(t_fractal *set, int *data, t_flags *flags)
+int	balance_du_gros_thread(t_fractal *set, int *data, t_flags *flags)
 {
 	pthread_t	*threads;
 	t_thread	*io;
@@ -26,16 +26,14 @@ int balance_du_gros_thread(t_fractal *set, int *data, t_flags *flags)
 	i = 0;
 	while (i < flags->iterations)
 	{
-		io[i] = (t_thread){set, data, (SIZE_Y * i) / flags->iterations, (SIZE_Y * (i + 1)) / flags->iterations, i, flags};
+		io[i] = (t_thread){set, data, (SIZE_Y * i) / flags->iterations,
+						(SIZE_Y * (i + 1)) / flags->iterations, i, flags};
 		u = pthread_create(&threads[i], NULL, calc_set, &io[i]);
 		++i;
 	}
 	i = 0;
 	while (i < flags->iterations)
-	{
-		pthread_join(threads[i], NULL);
-		++i;
-	}
+		pthread_join(threads[i++], NULL);
 	free(threads);
 	free(io);
 	return (1);

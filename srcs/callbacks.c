@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 14:15:13 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 14:58:11 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:31:14 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,12 @@
 
 int		mouse_move(int x, int y, t_prog *prog)
 {
-	if (prog->set->f == julia)
+	if (prog->set->f == julia || prog->set->f == mandelbrot3)
 	{
 		prog->flags->x = (double)50 / x;
 		prog->flags->y = (double)50 / y;
 		draw(prog);
 	}
-	return (0);
-}
-
-int		clos(void *d)
-{
-	write(1, "bisous :* \n", 11);
-	return (0);
-}
-
-int		mouse_hook(int button, int x, int y, t_prog *prog)
-{
-	double		spanx;
-	double		spany;
-	double		xx;
-	double		yy;
-
-	spanx = (prog->set->max_re - prog->set->min_re);
-	spany = (prog->set->max_im - prog->set->min_im);
-	xx = (x / (double)(SIZE_X / 2) - 1) * spanx / 2;
-	yy = -(y / (double)(SIZE_Y / 2) - 1) * spany / 2;
-	prog->set->min_re += xx / 3;
-	prog->set->max_re += xx / 3;
-	prog->set->min_im += yy / 3;
-	prog->set->max_im += yy / 3;
-	prog->set->re_factor = spanx / (SIZE_X - 1);
-	prog->set->im_factor = spany / (SIZE_Y - 1);
-	draw(prog);
-	prog->set->min_re += spanx / 20;
-	prog->set->max_re -= spanx / 20;
-	prog->set->min_im += spany / 20;
-	prog->set->max_im -= spany / 20;
-	prog->set->max_iterations += 0.25;
 	return (0);
 }
 
@@ -67,7 +35,7 @@ void	mvt(int keycode, t_prog *prog)
 	double		spany;
 	double		xx;
 	double		yy;
-	
+
 	spanx = (prog->set->max_re - prog->set->min_re);
 	spany = (prog->set->max_im - prog->set->min_im);
 	if (keycode == 123 || keycode == 124)
@@ -86,21 +54,24 @@ void	mvt(int keycode, t_prog *prog)
 
 int		keyb_hook(int keycode, t_prog *prog)
 {
-	printf("key %d\n", keycode); fflush(stdout);
 	if (keycode == A)
 		go_f(mandelbrot, prog);
 	else if (keycode == S)
 		go_f(julia, prog);
 	else if (keycode == D)
+		go_f(mandelbrot2, prog);
+	else if (keycode == F)
+		go_f(mandelbrot3, prog);
+	else if (keycode == G)
 		go_f(burningship, prog);
-	else if (keycode == Q)
+	else if (keycode == Z)
+		prog->flags->factor += 0.1;
+	else if (keycode == X)
+		prog->flags->factor -= 0.1;
+	else if (keycode == C)
 		prog->flags->color1 += 20;
-	else if (keycode == W)
+	else if (keycode == V)
 		prog->flags->color1 -= 20;
-	else if (keycode == E)
-		prog->flags->color2 += 20;
-	else if (keycode == R)
-		prog->flags->color2 -= 20;
 	else
 		mvt(keycode, prog);
 	draw(prog);
