@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 17:38:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:46:00 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int				balance_du_gros_thread(t_fractal *set, int *data,
 								t_flags *flags);
 int				julia(int n, double c_re, double c_im, t_flags *flags);
 int				mandelbrot(int n, double c_re, double c_im, t_flags *flags);
-int				mandelbrot3(int n, double c_re, double c_im, t_flags *flags);
+int				julia2(int n, double c_re, double c_im, t_flags *flags);
 int				mandelbrot2(int n, double c_re, double c_im, t_flags *flags);
 int				burningship(int n, double c_re, double c_im, t_flags *flags);
 void			*calc_set(void *v);

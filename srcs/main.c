@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 17:40:56 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:01:48 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,19 @@ int			take_flags(char *argv, t_libx *libxs, t_prog *progs,
 	progs->set = sets;
 	if (!ft_strcmp(argv, "julia"))
 		progs->set->f = julia;
+	else if (!ft_strcmp(argv, "mandelbrot2"))
+		progs->set->f = mandelbrot2;
 	else if (!ft_strcmp(argv, "mandelbrot"))
 		progs->set->f = mandelbrot;
+	else if (!ft_strcmp(argv, "julia2"))
+		progs->set->f = julia2;
 	else if (!ft_strcmp(argv, "burningship"))
 		progs->set->f = burningship;
 	else
 	{
-		printf("lapin compris %s", argv);
+		write(1, "lapin compris : ", 16);
+		write(1, argv, ft_strlen(argv));
+		write(1, "\n", 1);
 		return (0);
 	}
 	go(progs);
@@ -66,7 +72,7 @@ int			go(t_prog *prog)
 		prog->libx->img->ptr, &(prog->libx->img->bpp),
 		&(prog->libx->img->sl), &(prog->libx->img->endian));
 	init_set(prog->set);
-	*(prog->flags) = (t_flags){0, 0, 20, 40, 40, 1.1};
+	*(prog->flags) = (t_flags){0, 0, 20, 40, 40, 1};
 	draw(prog);
 	mlx_mouse_hook(prog->libx->win, mouse_hook, prog);
 	mlx_hook(prog->libx->win, 6, 0, mouse_move, prog);
@@ -83,7 +89,7 @@ int			main(int argc, char **argv)
 	t_fractal	*sets;
 
 	if (argc == 1)
-		argc = 2;
+		*argv = "mandelbrot";
 	else
 		++argv;
 	libxs = malloc(sizeof(t_libx) * (argc - 1));

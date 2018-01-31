@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 17:26:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 17:31:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:03:52 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		mouse_hook_r(int x, int y, t_prog *prog)
 	spany = (prog->set->max_im - prog->set->min_im);
 	xx = (x / (double)(SIZE_X / 2) - 1) * spanx / 2;
 	yy = -(y / (double)(SIZE_Y / 2) - 1) * spany / 2;
-	prog->set->min_re -= yy / 10;
-	prog->set->max_re -= yy / 10;
+	prog->set->min_re += yy / 10;
+	prog->set->max_re += yy / 10;
 	prog->set->min_im -= xx / 10;
 	prog->set->max_im -= xx / 10;
 	prog->set->re_factor = spanx / (SIZE_X - 1);

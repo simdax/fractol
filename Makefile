@@ -1,5 +1,5 @@
 NAME := fractol
-SRCS := main.c color.c mandelbrot.c thread.c callbacks.c
+SRCS := main.c color.c mandelbrot.c thread.c callbacks.c callbacks2.c mandelbrot_fs.c
 LD := -L lft
 INC := -I lft -I srcs
 FLAGS := $(LD) $(INC) -g3 -Werror -Wextra -Wall -O3 -flto -march=native

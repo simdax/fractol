@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 14:15:13 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 17:31:14 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:46:20 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		mouse_move(int x, int y, t_prog *prog)
 {
-	if (prog->set->f == julia || prog->set->f == mandelbrot3)
+	if (prog->set->f == julia || prog->set->f == julia2)
 	{
 		prog->flags->x = (double)50 / x;
 		prog->flags->y = (double)50 / y;
@@ -61,7 +61,7 @@ int		keyb_hook(int keycode, t_prog *prog)
 	else if (keycode == D)
 		go_f(mandelbrot2, prog);
 	else if (keycode == F)
-		go_f(mandelbrot3, prog);
+		go_f(julia2, prog);
 	else if (keycode == G)
 		go_f(burningship, prog);
 	else if (keycode == Z)
