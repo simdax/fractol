@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 17:33:53 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 18:02:32 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:10:46 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ int		mandelbrot2(int n, double c_re, double c_im, t_flags *flags)
 		z_im = 2 * z_re * -z_im - c_im;
 		z_re = z_re2 - z_im2 + c_re;
 	}
-	return (flags->color1 / i);
+	return (color2hex(create_color(360 / flags->color1, 1 / z_re, 1 / z_im)));
 }

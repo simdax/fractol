@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 17:53:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 17:44:35 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:12:39 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			burningship(int n, double c_re, double c_im, t_flags *flags)
 		z_im = 2 * ft_abs_d(z_re) * ft_abs_d(z_im) + c_im;
 		z_re = z_re2 - z_im2 + c_re;
 	}
-	return (color2hex(create_color(flags->color2, z_re2, z_im2)));
+	return (color2hex(create_color(flags->color1, z_re2, z_im2)));
 }
 
 int			julia(int n, double c_re, double c_im, t_flags *flags)
@@ -54,7 +54,7 @@ int			julia(int n, double c_re, double c_im, t_flags *flags)
 		z_im = 2 * z_re * z_im + flags->y;
 		z_re = z_re2 - z_im2 + flags->x;
 	}
-	return (color2hex(create_color(z_re2 * z_im2 * flags->color2, 0.3, 0.3)));
+	return (color2hex(create_color(z_re2 * z_im2 * flags->color1, 0.3, 0.3)));
 }
 
 int			julia2(int n, double c_re, double c_im, t_flags *flags)
@@ -71,11 +71,11 @@ int			julia2(int n, double c_re, double c_im, t_flags *flags)
 		z_re2 = z_re * z_re;
 		z_im2 = z_im * z_im;
 		if (z_re2 + z_im2 > 4)
-			return (0);
+			return (color2hex(create_color(flags->color1, 0.2, 0.58)));
 		z_im = 2 * z_re * -z_im + flags->y;
 		z_re = z_re2 - z_im2 + flags->x;
 	}
-	return (color2hex(create_color(flags->color2, 0.2, 0.58)));
+	return (0);
 }
 
 void		*calc_set(void *a)
