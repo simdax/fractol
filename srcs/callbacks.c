@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 14:15:13 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 18:31:30 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 14:58:11 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		mouse_hook(int button, int x, int y, t_prog *prog)
 	prog->set->max_re -= spanx / 20;
 	prog->set->min_im += spany / 20;
 	prog->set->max_im -= spany / 20;
-	prog->set->max_iterations += 2;
+	prog->set->max_iterations += 0.25;
 	return (0);
 }
 
@@ -87,18 +87,20 @@ void	mvt(int keycode, t_prog *prog)
 int		keyb_hook(int keycode, t_prog *prog)
 {
 	printf("key %d\n", keycode); fflush(stdout);
-	if (keycode == 0)
+	if (keycode == A)
 		go_f(mandelbrot, prog);
-	else if (keycode == 1)
+	else if (keycode == S)
 		go_f(julia, prog);
-	else if (keycode == 2)
-		prog->flags->color1 += 10;
-	else if (keycode == 3)
-		prog->flags->color1 -= 10;
-	else if (keycode == 4)
-		prog->flags->color2 += 10;
-	else if (keycode == 5)
-		prog->flags->color2 -= 10;
+	else if (keycode == D)
+		go_f(burningship, prog);
+	else if (keycode == Q)
+		prog->flags->color1 += 20;
+	else if (keycode == W)
+		prog->flags->color1 -= 20;
+	else if (keycode == E)
+		prog->flags->color2 += 20;
+	else if (keycode == R)
+		prog->flags->color2 -= 20;
 	else
 		mvt(keycode, prog);
 	draw(prog);

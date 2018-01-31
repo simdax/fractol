@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 17:54:25 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 14:54:32 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		take_flags(char *argv, t_libx *libxs, t_prog *progs, t_fractal *sets)
 		progs->set->f = julia;
 	else if (!ft_strcmp(argv, "mandelbrot"))
 		progs->set->f = mandelbrot;
+	else if (!ft_strcmp(argv, "burningship"))
+		progs->set->f = burningship;
 	else
 	{
 		printf("lapin compris %s", argv);
@@ -42,11 +44,11 @@ int		take_flags(char *argv, t_libx *libxs, t_prog *progs, t_fractal *sets)
 
 void		init_set(t_fractal *set)
 {
-	set->max_re = 1.0;
-	set->min_re = -1.0;
-	set->max_im = 1.0;
-	set->min_im = -1.0;
-	set->max_iterations = 30;
+	set->max_re = 2.0;
+	set->min_re = -2.0;
+	set->max_im = 2.0;
+	set->min_im = -2.0;
+	set->max_iterations = 20;
 	set->re_factor = (set->max_re - set->min_re) / (SIZE_X - 1);
 	set->im_factor = (set->max_im - set->min_im) / (SIZE_Y - 1);
 	return ;

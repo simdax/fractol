@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/30 18:01:56 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/01/31 14:54:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include "unistd.h"
 # include <pthread.h>
 # include "libft.h"
+
+# include "keys.h"
 
 # define SIZE_X 1000
 # define SIZE_Y	1000
@@ -125,7 +127,7 @@ typedef struct	s_fractal
 	double		max_im;
 	double		re_factor;
 	double		im_factor;
-	unsigned	max_iterations;
+	float		max_iterations;
 	int			(*f)(int, double, double, t_flags*);
 }				t_fractal;
 
@@ -146,9 +148,11 @@ typedef struct	s_prog
 	t_flags		*flags;
 }				t_prog;
 
+double			ft_abs_d(double d);
 int				balance_du_gros_thread(t_fractal *set, int *data, t_flags *flags);
 int				julia(int n, double c_re, double c_im, t_flags *flags);
 int				mandelbrot(int n, double c_re, double c_im, t_flags *flags);
+int				burningship(int n, double c_re, double c_im, t_flags *flags);
 void			*calc_set(void *);
 void			hydrate_set(t_fractal *set);
 void			draw(t_prog *prog);
