@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 17:26:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/02/01 10:17:47 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/01 10:38:37 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ int		mouse_hook(int button, int x, int y, t_prog *prog)
 	return (0);
 }
 
+void	zoom_chelou(double xx, double yy, t_prog *prog)
+{
+	if ((xx > 0 && yy < 0) || (xx < 0 && yy > 0))
+	{
+		xx = -xx;
+		yy = -yy;
+	}
+	prog->set->min_re += yy / 10;
+	prog->set->max_re += yy / 10;
+	prog->set->min_im += xx / 10;
+	prog->set->max_im += xx / 10;
+}
+
 int		mouse_hook_r(int x, int y, t_prog *prog)
 {
 	double		spanx;
@@ -32,10 +45,7 @@ int		mouse_hook_r(int x, int y, t_prog *prog)
 	spany = (prog->set->max_im - prog->set->min_im);
 	xx = (x / (double)(SIZE_X / 2) - 1) * spanx / 2;
 	yy = -(y / (double)(SIZE_Y / 2) - 1) * spany / 2;
-	prog->set->min_re += yy / 10;
-	prog->set->max_re += yy / 10;
-	prog->set->min_im -= xx / 10;
-	prog->set->max_im -= xx / 10;
+	zoom_chelou(xx, yy, prog);
 	prog->set->re_factor = spanx / (SIZE_X - 1);
 	prog->set->im_factor = spany / (SIZE_Y - 1);
 	draw(prog);
