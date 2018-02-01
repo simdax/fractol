@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/02/01 10:09:36 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/01 10:46:27 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,22 @@ void		draw(t_prog *prog)
 		exit(0);
 }
 
-int			take_flags(char *argv, t_libx *libxs, t_prog *progs,
-					t_fractal *sets)
+int			take_flags(char *argv, t_libx **libxs, t_prog **progs,
+					t_fractal **sets)
 {
-	++g_wins;
-	libxs->name = ft_strjoin("fractol : ", argv);
-	progs->libx = libxs;
-	progs->set = sets;
+	(*libxs)->name = ft_strjoin("fractol : ", argv);
+	(*progs)->libx = *libxs;
+	(*progs)->set = *sets;
 	if (!ft_strcmp(argv, "julia"))
-		progs->set->f = julia;
+		(*progs)->set->f = julia;
 	else if (!ft_strcmp(argv, "mandelbrot2"))
-		progs->set->f = mandelbrot2;
+		(*progs)->set->f = mandelbrot2;
 	else if (!ft_strcmp(argv, "mandelbrot"))
-		progs->set->f = mandelbrot;
+		(*progs)->set->f = mandelbrot;
 	else if (!ft_strcmp(argv, "julia2"))
-		progs->set->f = julia2;
+		(*progs)->set->f = julia2;
 	else if (!ft_strcmp(argv, "burningship"))
-		progs->set->f = burningship;
+		(*progs)->set->f = burningship;
 	else
 	{
 		write(1, "lapin compris : ", 16);
@@ -48,7 +47,10 @@ int			take_flags(char *argv, t_libx *libxs, t_prog *progs,
 		write(1, "\n", 1);
 		return (0);
 	}
-	go(progs);
+	go(*progs);
+	++(*libxs);
+	++(*progs);
+	++(*sets);
 	return (1);
 }
 
@@ -103,12 +105,10 @@ int			main(int argc, char **argv)
 		while (*argv)
 		{
 			libxs->mlx = mlx;
-			take_flags(*argv, libxs, progs, sets);
-			++libxs;
-			++progs;
-			++sets;
+			g_wins += take_flags(*argv, &libxs, &progs, &sets);
 			++argv;
 		}
-		mlx_loop(mlx);
+		if (g_wins)
+			mlx_loop(mlx);
 	}
 }
