@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/02/01 10:46:27 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/01 10:50:10 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ int			main(int argc, char **argv)
 		while (*argv)
 		{
 			libxs->mlx = mlx;
-			g_wins += take_flags(*argv, &libxs, &progs, &sets);
+			if (!(take_flags(*argv, &libxs, &progs, &sets)))
+				free(libxs->name);
+			else
+				++g_wins;
 			++argv;
 		}
 		if (g_wins)
