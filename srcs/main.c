@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/02/01 10:50:10 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/01 12:40:18 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,33 +24,29 @@ void		draw(t_prog *prog)
 		exit(0);
 }
 
-int			take_flags(char *argv, t_libx **libxs, t_prog **progs,
+int			take_flags(char ***argv, t_libx **libxs, t_prog **progs,
 					t_fractal **sets)
 {
-	(*libxs)->name = ft_strjoin("fractol : ", argv);
 	(*progs)->libx = *libxs;
 	(*progs)->set = *sets;
-	if (!ft_strcmp(argv, "julia"))
+	(*libxs)->name = ft_strjoin("fractol : ", **argv);
+	if (!ft_strcmp(**argv, "julia"))
 		(*progs)->set->f = julia;
-	else if (!ft_strcmp(argv, "mandelbrot2"))
+	else if (!ft_strcmp(**argv, "mandelbrot2"))
 		(*progs)->set->f = mandelbrot2;
-	else if (!ft_strcmp(argv, "mandelbrot"))
+	else if (!ft_strcmp(**argv, "mandelbrot"))
 		(*progs)->set->f = mandelbrot;
-	else if (!ft_strcmp(argv, "julia2"))
+	else if (!ft_strcmp(**argv, "julia2"))
 		(*progs)->set->f = julia2;
-	else if (!ft_strcmp(argv, "burningship"))
+	else if (!ft_strcmp(**argv, "burningship"))
 		(*progs)->set->f = burningship;
 	else
-	{
-		write(1, "lapin compris : ", 16);
-		write(1, argv, ft_strlen(argv));
-		write(1, "\n", 1);
 		return (0);
-	}
-	go(*progs);
+	go(*progs, *libxs, *sets);
 	++(*libxs);
 	++(*progs);
 	++(*sets);
+	++(*argv);
 	return (1);
 }
 
@@ -105,11 +101,10 @@ int			main(int argc, char **argv)
 		while (*argv)
 		{
 			libxs->mlx = mlx;
-			if (!(take_flags(*argv, &libxs, &progs, &sets)))
-				free(libxs->name);
+			if (!(take_flags(&argv, &libxs, &progs, &sets)))
+				error(*argv, libxs);
 			else
 				++g_wins;
-			++argv;
 		}
 		if (g_wins)
 			mlx_loop(mlx);

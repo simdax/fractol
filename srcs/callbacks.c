@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 14:15:13 by scornaz           #+#    #+#             */
-/*   Updated: 2018/02/01 09:45:11 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/01 12:41:33 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,12 @@ int		keyb_hook(int keycode, t_prog *prog)
 	if (keycode == 53)
 		exit(0);
 	return (0);
+}
+
+void	error(char *argv, t_libx *libx)
+{
+	write(1, "lapin compris : ", 16);
+	write(1, argv, ft_strlen(argv));
+	write(1, "\n", 1);
+	free(libx->name);
 }

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/02/01 10:07:59 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/01 12:40:57 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "fcntl.h"
 # include "stdlib.h"
 # include "unistd.h"
+# include "printf.h"
 # include <pthread.h>
 # include "libft.h"
 # include <complex.h>
@@ -104,6 +105,7 @@ typedef struct	s_prog
 
 extern int		g_wins;
 
+void			error(char *argv, t_libx *libx);
 int				close_win(t_prog *prog);
 double			ft_abs_d(double d);
 int				balance_du_gros_thread(t_fractal *set, int *data,
@@ -118,7 +120,6 @@ void			hydrate_set(t_fractal *set);
 void			draw(t_prog *prog);
 void			init_set(t_fractal *set);
 int				clos(void *d);
-int				go(t_prog *prog);
 void			go_f(int (*f)(int, double, double, t_flags*), t_prog *prog);
 int				keyb_hook(int keycode, t_prog *data);
 int				mouse_hook(int button, int x, int y, t_prog *prog);
