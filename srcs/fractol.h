@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 18:08:33 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/01 10:07:59 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,9 @@ typedef struct	s_prog
 	t_flags		*flags;
 }				t_prog;
 
+extern int		g_wins;
+
+int				close_win(t_prog *prog);
 double			ft_abs_d(double d);
 int				balance_du_gros_thread(t_fractal *set, int *data,
 								t_flags *flags);

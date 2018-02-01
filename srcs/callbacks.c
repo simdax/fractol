@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 14:15:13 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 17:46:20 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/01 09:45:11 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int		mouse_move(int x, int y, t_prog *prog)
 
 void	go_f(int (*f)(int, double, double, t_flags*), t_prog *prog)
 {
+	ft_bzero(prog->libx->img->data, SIZE_X * SIZE_Y + 1);
+	mlx_put_image_to_window(prog->libx->mlx, prog->libx->win,
+							prog->libx->img->ptr, 0, 0);
 	prog->set->f = f;
 	init_set(prog->set);
 }

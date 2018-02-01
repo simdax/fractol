@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 17:26:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 18:03:52 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/01 10:17:47 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,18 @@ int		mouse_hook_l(int x, int y, t_prog *prog)
 	prog->set->min_im += spany / 20;
 	prog->set->max_im -= spany / 20;
 	prog->set->max_iterations += 0.35;
+	return (0);
+}
+
+int		close_win(t_prog *prog)
+{
+	--g_wins;
+	if (!g_wins)
+	{
+		write(1, "BISOUS ❤️ \n", 15);
+		exit(0);
+	}
+	free(prog->libx->img);
+	free(prog->flags);
 	return (0);
 }

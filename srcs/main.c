@@ -6,11 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/31 18:01:48 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/01 10:09:36 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int			g_wins = 0;
 
 void		draw(t_prog *prog)
 {
@@ -25,6 +27,7 @@ void		draw(t_prog *prog)
 int			take_flags(char *argv, t_libx *libxs, t_prog *progs,
 					t_fractal *sets)
 {
+	++g_wins;
 	libxs->name = ft_strjoin("fractol : ", argv);
 	progs->libx = libxs;
 	progs->set = sets;
@@ -72,39 +75,40 @@ int			go(t_prog *prog)
 		prog->libx->img->ptr, &(prog->libx->img->bpp),
 		&(prog->libx->img->sl), &(prog->libx->img->endian));
 	init_set(prog->set);
-	*(prog->flags) = (t_flags){0, 0, 20, 40, 40, 1};
+	*(prog->flags) = (t_flags){0, 0, 20, 40, 1};
 	draw(prog);
 	mlx_mouse_hook(prog->libx->win, mouse_hook, prog);
 	mlx_hook(prog->libx->win, 6, 0, mouse_move, prog);
 	mlx_hook(prog->libx->win, 2, 3, keyb_hook, prog);
+	mlx_hook(prog->libx->win, 17, 0, close_win, prog);
 	return (0);
 }
 
 int			main(int argc, char **argv)
 {
-	int			i;
 	void		*mlx;
 	t_libx		*libxs;
 	t_prog		*progs;
 	t_fractal	*sets;
 
-	if (argc == 1)
-		*argv = "mandelbrot";
+	if (argc == 1 || argc > 5)
+		write(2, "usage : use empty files (max 4)\n", 33);
 	else
-		++argv;
-	libxs = malloc(sizeof(t_libx) * (argc - 1));
-	progs = malloc(sizeof(t_prog) * (argc - 1));
-	sets = malloc(sizeof(t_fractal) * (argc - 1));
-	i = 0;
-	mlx = mlx_init();
-	while (*argv)
 	{
-		libxs->mlx = mlx;
-		take_flags(*argv, libxs, progs, sets);
-		++libxs;
-		++progs;
-		++sets;
 		++argv;
+		libxs = malloc(sizeof(t_libx) * (argc - 1));
+		progs = malloc(sizeof(t_prog) * (argc - 1));
+		sets = malloc(sizeof(t_fractal) * (argc - 1));
+		mlx = mlx_init();
+		while (*argv)
+		{
+			libxs->mlx = mlx;
+			take_flags(*argv, libxs, progs, sets);
+			++libxs;
+			++progs;
+			++sets;
+			++argv;
+		}
+		mlx_loop(mlx);
 	}
-	mlx_loop(mlx);
 }
