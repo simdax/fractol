@@ -2,7 +2,7 @@ NAME := fractol
 SRCS := main.c color.c mandelbrot.c thread.c callbacks.c callbacks2.c mandelbrot_fs.c
 LD := -L lft
 INC := -I srcs -I lft
-FLAGS := $(LD) $(INC) -g3 -Werror -Wextra -Wall -O3 -flto -march=native
+FLAGS := $(LD) $(INC) -Werror -Wextra -Wall -O3 -flto -march=native
 OBJS := $(SRCS:%.c=objs/%.o)
 
 vpath %.c srcs

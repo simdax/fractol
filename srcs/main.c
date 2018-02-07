@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/02/01 12:40:18 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/07 14:21:06 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		init_set(t_fractal *set)
 	return ;
 }
 
-int			go(t_prog *prog)
+int			go(t_prog *prog, t_libx *libxs, t_fractal *sets)
 {
 	prog->libx->win = mlx_new_window(prog->libx->mlx, SIZE_X, SIZE_Y,
 									prog->libx->name);
