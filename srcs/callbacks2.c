@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 17:26:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/02/01 10:38:37 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/07 18:15:49 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		mouse_hook(int button, int x, int y, t_prog *prog)
 {
-	if (button == 4)
+	if (button == 4 && prog->set->max_re < 5)
 		mouse_hook_r(x, y, prog);
 	else if (button == 5)
 		mouse_hook_l(x, y, prog);

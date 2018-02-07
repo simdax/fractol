@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 11:05:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/02/07 14:21:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/07 18:08:02 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int			main(int argc, char **argv)
 		{
 			libxs->mlx = mlx;
 			if (!(take_flags(&argv, &libxs, &progs, &sets)))
-				error(*argv, libxs);
+				error(&argv, libxs);
 			else
 				++g_wins;
 		}

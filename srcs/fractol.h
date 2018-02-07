@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:48:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/02/07 14:20:57 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/02/07 18:08:06 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct	s_prog
 
 extern int		g_wins;
 
-void			error(char *argv, t_libx *libx);
+void			error(char ***argv, t_libx *libx);
 int				close_win(t_prog *prog);
 double			ft_abs_d(double d);
 int				balance_du_gros_thread(t_fractal *set, int *data,
